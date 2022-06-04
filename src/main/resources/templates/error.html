@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Challenge Yourself Admin</title>
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+</head>
+
+<body>
+
+<div th:replace="header :: header">...</div>
+
+<section class="page_404">
+    <div class="error">
+        <div class="four_zero_four_bg">
+            <h1 class="text-center">oops...</h1>
+            <img class = "error-img" src="assets/images/funny-error-message.jpg">
+        </div>
+        <div class="contant_box_404">
+            <h3 class="h2">
+                Look like you're lost
+            </h3>
+            <p th:text="${'Error Message - ' + errormsg}"></p>
+        </div>
+    </div>
+</section>
+</body>
+
+</html>
