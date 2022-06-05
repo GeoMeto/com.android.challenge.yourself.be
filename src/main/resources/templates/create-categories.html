@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Challenge Yourself Admin</title>
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="assets/css/style-starter.css">
+</head>
+
+<body>
+<div th:replace="header :: header"></div>
+    <div class="input-wrapper">
+        <h2>
+        </h2>
+        <form action="/categories" method="post" class="form-style" th:object="${category}">
+            <label for="name">Category name</label>
+            <input class="input-style" type="text" th:field="*{name}" placeholder="Category name" id="name"/>
+            <input class="input-btn-style" type="submit" value="Create">
+        </form>
+    </div>
+</body>
+
+</html>

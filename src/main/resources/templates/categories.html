@@ -17,7 +17,8 @@
     <table class="fl-table">
         <thead>
         <tr>
-            <th scope="col">Name</th>
+            <th scope="col">Category name</th>
+            <th scope="col">Is deleted</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
         </tr>
@@ -25,12 +26,27 @@
         <tbody>
         <tr th:each="category: ${categories}">
             <td th:text="${category.name}"></td>
-            <td><a th:href="@{/category(id=${category.categoryId})}" class="button">EDIT</a></td>
-            <td><a th:href="@{/category(id=${category.categoryId})}" class="button">DELETE</a></td>
+            <td th:text="${category.isDeleted}"></td>
+            <td class="row-btn">
+                <form>
+                    <a th:href="@{/category/edit/{id}(id=${category.id})}" class="button">EDIT</a>
+                </form>
+            </td>
+            <td class="row-btn">
+                <form>
+                    <button th:action="@{/category(id=${category.id})}" method="delete" class="button">DELETE
+                    </button>
+                </form>
+            </td>
         </tr>
         </tbody>
     </table>
-    <div/>
+    <div class="create-btn-container">
+        <form>
+            <a th:href="@{/create-category}" class="button create-btn">CREATE</a>
+        </form>
+    </div>
+</div>
 </body>
 
 </html>
