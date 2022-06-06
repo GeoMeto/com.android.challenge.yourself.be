@@ -16,13 +16,13 @@
 <div class="input-wrapper">
     <h2>
     </h2>
-    <form th:action="@{/category/{id}(id=${category.id})}" class="form-style" th:object="${category}">
+    <form th:action="@{/category/{id}(id=${category.id})}" method="PUT" class="form-style" th:object="${category}">
 
         <label for="name">Category name</label>
         <input class="input-style" type="text" th:field="*{name}" placeholder="Category name" id="name"/>
         <label for="isDeleted">Is deleted</label>
         <input type="checkbox" id="isDeleted" value="isDeleted" name="isDeleted" th:checked="${isDeleted}">
-        <input name="_method" type="hidden" value="put" />
+        <input name="_method" type="hidden" value="PUT" />
 
         </br>
         <input class="input-btn-style" type="submit" value="Update">

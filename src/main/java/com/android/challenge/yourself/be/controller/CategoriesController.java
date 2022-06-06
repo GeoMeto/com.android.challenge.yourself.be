@@ -24,12 +24,11 @@ public class CategoriesController {
     @Autowired
     private CategoriesService categoriesService;
 
-    @RequestMapping(value = {"", "/", "categories"}, method = RequestMethod.GET)
-    public ModelAndView displayCategoriesPage(Model model) {
+    @RequestMapping(value = {"categories"}, method = RequestMethod.GET)
+    public String displayCategoriesPage(Model model) {
         List<Category> categories = categoriesService.getCategories();
-        ModelAndView modelAndView = new ModelAndView("categories.html");
-        modelAndView.addObject("categories", categories);
-        return modelAndView;
+        model.addAttribute("categories", categories);
+        return "redirect:categories.html";
     }
 
     @RequestMapping(value = {"/category/edit/{id}"}, method = RequestMethod.GET)

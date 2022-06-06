@@ -13,8 +13,8 @@ import javax.validation.constraints.Size;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "category")
-public class Category extends BaseEntity {
+@Table(name = "challenge")
+public class Challenge {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
@@ -25,5 +25,11 @@ public class Category extends BaseEntity {
     @Size(min = 3, max = 45, message = "Name must be between 3 and 45 characters long")
     private String name;
 
-    private boolean isDeleted;
+    @NotBlank(message = "Name must not be blank")
+    @Size(min = 3, max = 45, message = "Measurement must be between 3 and 45 characters long")
+    private String measurement;
+
+    private int target;
+    @Size(max = 100, message = "Description can be max 100 characters long")
+    private String description;
 }
