@@ -11,10 +11,12 @@ public class User extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "userId")
-    private int userId;
+    @Column(name = "id")
+    private int id;
     private String email;
-    private String userName;
+    private String username;
     private String password;
     private String role;
+    private boolean isActive;
+    private boolean isDeleted;
 }

@@ -16,14 +16,14 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
+                //                .anyRequest().permitAll()
                 .authorizeRequests()
-                .mvcMatchers("/categories").hasRole(AdminRole)
-                .mvcMatchers("/create-category").hasRole(AdminRole)
-                .mvcMatchers("/challenges").hasRole(AdminRole)
-                .mvcMatchers("/users").hasRole(AdminRole)
-//                .anyRequest().permitAll()
+                .mvcMatchers("/categories/**").hasRole(AdminRole)
+                .mvcMatchers("/create-category/**").hasRole(AdminRole)
+                .mvcMatchers("/challenges/**").hasRole(AdminRole)
+                .mvcMatchers("/users/**").hasRole(AdminRole)
                 .and().formLogin().loginPage("/login")
-                .defaultSuccessUrl("/dashboard").failureUrl("/login?error=true").permitAll()
+                .defaultSuccessUrl("/categories").failureUrl("/login?error=true").permitAll()
                 .and().logout().invalidateHttpSession(true).permitAll()
                 .and().httpBasic();
     }

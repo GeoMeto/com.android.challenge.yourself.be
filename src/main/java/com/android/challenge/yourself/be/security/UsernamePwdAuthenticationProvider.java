@@ -30,13 +30,12 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
         String pwd = authentication.getCredentials().toString();
         if (email == "" || pwd == "") {
             throw new BadCredentialsException("Invalid credentials!");
-
         }
-        User user = personRepository.getByEmail(email);
-        if (null != user && user.getUserId() > 0 &&
+        User user = personRepository.readByEmail(email);
+        if (null != user && user.getId() > 0 &&
                 passwordEncoder.matches(pwd, user.getPassword())) {
             return new UsernamePasswordAuthenticationToken(
-                    user.getUserName(), null, getGrantedAuthorities(user.getRole()));
+                    user.getUsername(), null, getGrantedAuthorities(user.getRole()));
         } else {
             throw new BadCredentialsException("Invalid credentials!");
         }

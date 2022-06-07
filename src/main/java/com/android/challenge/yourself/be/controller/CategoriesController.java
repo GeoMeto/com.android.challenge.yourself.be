@@ -28,7 +28,7 @@ public class CategoriesController {
     public String displayCategoriesPage(Model model) {
         List<Category> categories = categoriesService.getCategories();
         model.addAttribute("categories", categories);
-        return "redirect:categories.html";
+        return "categories.html";
     }
 
     @RequestMapping(value = {"/category/edit/{id}"}, method = RequestMethod.GET)
@@ -39,7 +39,7 @@ public class CategoriesController {
         return "edit-categories.html";
     }
 
-    @RequestMapping(value = {"create-category"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/category/new"}, method = RequestMethod.GET)
     public String displayCreateCategoryPage(Model model) {
         model.addAttribute("category", new Category());
         return "create-categories.html";
@@ -49,9 +49,10 @@ public class CategoriesController {
     public String saveCategory(@Valid @ModelAttribute("category") Category category, Errors errors) {
         if (errors.hasErrors()) {
             log.error("Error when creating category: " + errors);
+            return "contact.html";
         }
         categoriesService.saveCategory(category);
-        return "categories.html";
+        return "redirect:categories";
     }
 
     @RequestMapping(value = {"categories/{id}"}, method = RequestMethod.PUT)

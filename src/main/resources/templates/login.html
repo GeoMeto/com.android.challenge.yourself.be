@@ -8,21 +8,19 @@
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <!-- Template CSS Style link -->
-    <link rel="stylesheet" href="assets/css/style-starter.css">
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
 </head>
 
 <body>
     <div class="input-wrapper">
         <h1>Login</h1>
         <form action="/login" method="post" class="form-style">
-            <li role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
+            <li class="error-style" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
                 th:text="${errorMessage}" />
-            <label for="username">Email</label>
-            </br>
+            <label class="label-style" for="username">Email</label>
             <input class="input-login" type="text" name="username" id="username" placeholder="Username"/>
             </br>
-            <label for="password">Password</label>
-            </br>
+            <label class="label-style" for="password">Password</label>
             <input class="input-login" type="password" name="password" id="password" placeholder="Password"/>
             </br>
             <button class="button">Log In</button>

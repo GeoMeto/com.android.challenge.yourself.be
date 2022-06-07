@@ -204,3 +204,15 @@ body{
     text-align: center;
     padding:50px;
 }
+
+.error-style{
+    background-color: #fc4903;
+    width: fit-content;
+    display: inline-block;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.label-style{
+    display: block;
+}

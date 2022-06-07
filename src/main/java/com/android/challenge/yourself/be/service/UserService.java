@@ -22,7 +22,7 @@ public class UserService {
         boolean isUserCreated = false;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         User createdUser = userRepository.save(user);
-        if (createdUser != null && createdUser.getUserId() > 0) {
+        if (createdUser != null && createdUser.getId() > 0) {
             isUserCreated = true;
         }
         return isUserCreated;
