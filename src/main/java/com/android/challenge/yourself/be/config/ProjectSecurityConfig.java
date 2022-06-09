@@ -2,11 +2,9 @@ package com.android.challenge.yourself.be.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
@@ -18,8 +16,8 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 //                .anyRequest().permitAll()
                 .authorizeRequests()
-                .mvcMatchers("/categories/**").hasRole(AdminRole)
-                .mvcMatchers("/create-category/**").hasRole(AdminRole)
+                .mvcMatchers("/categories").hasRole(AdminRole)
+                .mvcMatchers("/create-category").hasRole(AdminRole)
                 .mvcMatchers("/challenges/**").hasRole(AdminRole)
                 .mvcMatchers("/users/**").hasRole(AdminRole)
                 .and().formLogin().loginPage("/login")

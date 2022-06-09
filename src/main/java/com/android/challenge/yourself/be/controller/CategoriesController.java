@@ -11,10 +11,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -24,14 +22,14 @@ public class CategoriesController {
     @Autowired
     private CategoriesService categoriesService;
 
-    @RequestMapping(value = {"categories"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/categories"}, method = RequestMethod.GET)
     public String displayCategoriesPage(Model model) {
         List<Category> categories = categoriesService.getCategories();
         model.addAttribute("categories", categories);
         return "categories.html";
     }
 
-    @RequestMapping(value = {"/category/edit/{id}"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/categories/edit/{id}"}, method = RequestMethod.GET)
     public String displayEditCategoryPage(@PathVariable int id, Model model) {
         Category category = categoriesService.getCategory(id);
         model.addAttribute("category", category);
@@ -39,29 +37,30 @@ public class CategoriesController {
         return "edit-categories.html";
     }
 
-    @RequestMapping(value = {"/category/new"}, method = RequestMethod.GET)
+    @RequestMapping(value = {"/categories/new"}, method = RequestMethod.GET)
     public String displayCreateCategoryPage(Model model) {
         model.addAttribute("category", new Category());
         return "create-categories.html";
     }
 
-    @RequestMapping(value = {"categories"}, method = RequestMethod.POST)
+    @RequestMapping(value = {"/categories"}, method = RequestMethod.POST)
     public String saveCategory(@Valid @ModelAttribute("category") Category category, Errors errors) {
         if (errors.hasErrors()) {
             log.error("Error when creating category: " + errors);
-            return "contact.html";
+            return "categories.html";
         }
         categoriesService.saveCategory(category);
         return "redirect:categories";
     }
 
-    @RequestMapping(value = {"categories/{id}"}, method = RequestMethod.PUT)
+    @RequestMapping(value = {"/categories/{id}"}, method = RequestMethod.POST)
     public String updateCategory(@PathVariable int id, @Valid @ModelAttribute("category") Category category, Errors errors) {
         if (errors.hasErrors()) {
             log.error("Error when creating category: " + errors);
+            return "categories.html";
         }
         category.setId(id);
         categoriesService.updateCategory(category);
-        return "categories.html";
+        return "redirect:/categories";
     }
 }

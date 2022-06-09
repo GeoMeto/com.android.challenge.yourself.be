@@ -29,12 +29,12 @@
             <td th:text="${category.isDeleted}"></td>
             <td class="row-btn">
                 <form>
-                    <a th:href="@{/category/edit/{id}(id=${category.id})}" class="button">EDIT</a>
+                    <a th:href="@{/categories/edit/{id}(id=${category.id})}" class="button">EDIT</a>
                 </form>
             </td>
             <td class="row-btn">
                 <form>
-                    <button th:action="@{/category(id=${category.id})}" method="delete" class="button">DELETE
+                    <button th:action="@{/categories/delete/(id=${category.id})}" method="post" class="button">DELETE
                     </button>
                 </form>
             </td>
@@ -43,7 +43,7 @@
     </table>
     <div class="create-btn-container">
         <form>
-            <a th:href="@{/category/new}" class="button create-btn">CREATE</a>
+            <a th:href="@{/categories/new}" class="button create-btn">CREATE</a>
         </form>
     </div>
 </div>

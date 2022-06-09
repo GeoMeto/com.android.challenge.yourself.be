@@ -1,6 +1,5 @@
 package com.android.challenge.yourself.be.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,23 +12,28 @@ import java.util.Set;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "category")
-public class Category extends BaseEntity {
+@Table(name = "shared_challenge")
+public class SharedChallenge extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id")
     private int id;
 
-    @NotBlank(message = "Name must not be blank")
-    @Size(min = 3, max = 45, message = "Name must be between 3 and 45 characters long")
-    private String name;
-
+    private int likes;
+    private int dislikes;
     private boolean isDeleted;
 
-    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, targetEntity = Challenge.class)
-    private Set<Challenge> challenges;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ch_id", referencedColumnName = "id", nullable = false)
+    private CompletedChallenge completedChallenge;
+
+    @OneToMany(mappedBy = "sharedChallenge")
+    private Set<UserComment> userComments;
 }
