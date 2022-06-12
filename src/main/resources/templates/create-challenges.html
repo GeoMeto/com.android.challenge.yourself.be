@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Challenge Yourself Admin</title>
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
+</head>
+
+<body>
+<div th:replace="header :: header"></div>
+<div class="input-wrapper">
+    <h2>Create challenge</h2>
+    <form action="/admin/challenges" method="post" class="form-style" th:object="${challenge}">
+        <label for="name">Challenge name</label>
+        <input class="input-style" type="text" th:field="*{name}" placeholder="Category name" id="name"/>
+        <label for="categories">Category</label>
+        <div class="box">
+            <select id="categories" th:field="*{category.id}">
+                <option th:each="category : ${categories}" th:value="${category.id}"
+                        th:text="${category.name}"></option>
+            </select>
+        </div>
+        <label for="measurements">Measurements</label>
+        <div class="box">
+            <select id="measurements" th:field="*{measurement}">
+                <option th:each="measurement : ${T(com.android.challenge.yourself.be.constants.Measurement).values()}"
+                        th:value="${measurement.displayValue}" th:text="${measurement.displayValue}"></option>
+            </select>
+        </div>
+        <label for="target">Target</label>
+        <input class="input-style" type="number" th:field="*{target}" placeholder="Target" id="target"/>
+        <input class="input-btn-style" type="submit" value="Create">
+    </form>
+</div>
+</body>
+
+</html>

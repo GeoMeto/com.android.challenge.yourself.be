@@ -7,60 +7,76 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.util.List;
 
 @Slf4j
 @Controller
+@RequestMapping("admin")
 public class CategoriesController {
 
     @Autowired
     private CategoriesService categoriesService;
 
-    @RequestMapping(value = {"/categories"}, method = RequestMethod.GET)
-    public String displayCategoriesPage(Model model) {
+    @GetMapping(value = {"/categories"})
+    public ModelAndView displayCategoriesPage(Model model) {
+        ModelAndView modelAndView = new ModelAndView("categories.html");
         List<Category> categories = categoriesService.getCategories();
-        model.addAttribute("categories", categories);
-        return "categories.html";
+        modelAndView.addObject("categories", categories);
+        return modelAndView;
     }
 
-    @RequestMapping(value = {"/categories/edit/{id}"}, method = RequestMethod.GET)
-    public String displayEditCategoryPage(@PathVariable int id, Model model) {
+    @GetMapping(value = {"/categories/edit/{id}"})
+    public ModelAndView displayEditCategoryPage(@PathVariable int id, Model model) {
+        ModelAndView modelAndView = new ModelAndView("edit-categories.html");
         Category category = categoriesService.getCategory(id);
-        model.addAttribute("category", category);
-        model.addAttribute("isDeleted", category.isDeleted());
-        return "edit-categories.html";
+        modelAndView.addObject("category", category);
+        modelAndView.addObject("isDeleted", category.isDeleted());
+        return modelAndView;
     }
 
-    @RequestMapping(value = {"/categories/new"}, method = RequestMethod.GET)
-    public String displayCreateCategoryPage(Model model) {
-        model.addAttribute("category", new Category());
-        return "create-categories.html";
+    @GetMapping(value = {"/categories/new"})
+    public ModelAndView displayCreateCategoryPage(Model model) {
+        ModelAndView modelAndView = new ModelAndView("create-categories.html");
+        modelAndView.addObject("category", new Category());
+        return modelAndView;
     }
 
-    @RequestMapping(value = {"/categories"}, method = RequestMethod.POST)
-    public String saveCategory(@Valid @ModelAttribute("category") Category category, Errors errors) {
+    @PostMapping(value = {"/categories"})
+    public ModelAndView saveCategory(@Valid @ModelAttribute("category") Category category, Errors errors) {
+        ModelAndView modelAndView = new ModelAndView();
         if (errors.hasErrors()) {
             log.error("Error when creating category: " + errors);
-            return "categories.html";
+            modelAndView.setViewName("redirect:/admin/categories/new");
+            modelAndView.addObject("errorMessage", errors);
+            return modelAndView;
         }
         categoriesService.saveCategory(category);
-        return "redirect:categories";
+        modelAndView.setViewName("redirect:/admin/categories");
+        return modelAndView;
     }
 
-    @RequestMapping(value = {"/categories/{id}"}, method = RequestMethod.POST)
-    public String updateCategory(@PathVariable int id, @Valid @ModelAttribute("category") Category category, Errors errors) {
+    @PostMapping(value = {"/categories/{id}"})
+    public ModelAndView updateCategory(@PathVariable int id, @Valid @ModelAttribute("category") Category category, Errors errors) {
+        ModelAndView modelAndView = new ModelAndView();
         if (errors.hasErrors()) {
             log.error("Error when creating category: " + errors);
-            return "categories.html";
+            modelAndView.setViewName("redirect:/admin/categories/edit/" + id);
+            modelAndView.addObject("errorMessage", "Name is mandatory!");
+            return modelAndView;
         }
         category.setId(id);
         categoriesService.updateCategory(category);
-        return "redirect:/categories";
+        modelAndView.setViewName("redirect:/admin/categories");
+        return modelAndView;
+    }
+
+    @PostMapping(value = {"/categories/delete/{id}"})
+    public ModelAndView deleteCategory(@PathVariable int id) {
+        categoriesService.deleteCategory(id);
+        return new ModelAndView("redirect:/admin/categories");
     }
 }

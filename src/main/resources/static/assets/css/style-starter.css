@@ -206,13 +206,54 @@ body{
 }
 
 .error-style{
+    margin: 20px auto;
     background-color: #fc4903;
     width: fit-content;
-    display: inline-block;
+    display: block;
     padding: 20px;
-    margin-bottom: 20px;
 }
 
 .label-style{
     display: block;
+}
+
+.box select {
+  border-radius: 10px;
+  margin-top: 10px;
+  margin-bottom: 15px;
+  background-color: #84af00;
+  color: white;
+  padding: 12px;
+  width: 250px;
+  border: none;
+  font-size: 20px;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+  -webkit-appearance: button;
+  appearance: button;
+  outline: none;
+}
+
+.box::before {
+  content: "\f13a";
+  font-family: FontAwesome;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 28px;
+  line-height: 45px;
+  color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+  pointer-events: none;
+}
+
+.box:hover::before {
+  color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.box select option {
+  padding: 30px;
 }

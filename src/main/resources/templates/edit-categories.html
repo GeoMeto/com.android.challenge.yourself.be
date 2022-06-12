@@ -16,7 +16,7 @@
 <div class="input-wrapper">
     <h2>
     </h2>
-    <form th:action="@{/categories/{id}(id=${category.id})}" method="post" class="form-style" th:object="${category}">
+    <form th:action="@{/admin/categories/{id}(id=${category.id})}" method="post" class="form-style" th:object="${category}">
 
         <label for="name">Category name</label>
         <input class="input-style" type="text" th:field="*{name}" placeholder="Category name" id="name"/>

@@ -13,6 +13,45 @@
 <body>
 <div th:replace="header :: header"></div>
 
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th scope="col">Category</th>
+            <th scope="col">Challenge name</th>
+            <th scope="col">Measurement</th>
+            <th scope="col">Target</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="challenge: ${challenges}">
+            <td th:text="${challenge.category.name}"></td>
+            <td th:text="${challenge.name}"></td>
+            <td th:text="${challenge.measurement}"></td>
+            <td th:text="${challenge.target}"></td>
+            <td class="row-btn">
+                <form>
+                    <a th:href="@{/admin/challenges/edit/{id}(id=${challenge.id})}" class="button">EDIT</a>
+                </form>
+            </td>
+            <td class="row-btn">
+                <form>
+                    <button th:action="@{/admin/challenges/delete/(id=${challenge.id})}" method="post" class="button">DELETE
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="create-btn-container">
+        <form>
+            <a th:href="@{/admin/challenges/new}" class="button create-btn">CREATE</a>
+        </form>
+    </div>
+</div>
+
 </body>
 
 </html>

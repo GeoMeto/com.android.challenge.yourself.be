@@ -12,19 +12,19 @@
         <ul>
             <li class="nav-item">
                 <a th:classappend="${#httpServletRequest.getRequestURI() == '/categories' ? 'active':''}"
-                   th:href="@{/categories}" class="nav-link" aria-current="page">Categories</a>
+                   th:href="@{/admin/categories}" class="nav-link" aria-current="page">Categories</a>
             </li>
             <li class="nav-item">
                 <a th:classappend="${#httpServletRequest.getRequestURI() == '/challenges' ? 'active':''}"
-                   th:href="@{/challenges}" class="nav-link">Challenges</a>
+                   th:href="@{/admin/challenges}" class="nav-link">Challenges</a>
             </li>
             <li class="nav-item">
                 <a th:classappend="${#httpServletRequest.getRequestURI() == '/sharings' ? 'active':''}"
-                   th:href="@{/sharings}" class="nav-link">Posts</a>
+                   th:href="@{/admin/sharings}" class="nav-link">Posts</a>
             </li>
             <li class="nav-item">
                 <a th:classappend="${#httpServletRequest.getRequestURI() == '/users' ? 'active':''}"
-                   th:href="@{/users}" class="nav-link">Users</a>
+                   th:href="@{/admin/users}" class="nav-link">Users</a>
             </li>
             <li class="nav-item logout">
                 <a  th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}"
@@ -32,6 +32,8 @@
             </li>
         </ul>
     </nav>
+    <li class="error-style" role="alert" th:if="${!#strings.isEmpty(errorMessage)}"
+        th:text="${errorMessage}" />
 </header>
 </body>
 

@@ -16,7 +16,7 @@
     <div class="input-wrapper">
         <h2>
         </h2>
-        <form action="/categories" method="post" class="form-style" th:object="${category}">
+        <form action="/admin/categories" method="post" class="form-style" th:object="${category}">
             <label for="name">Category name</label>
             <input class="input-style" type="text" th:field="*{name}" placeholder="Category name" id="name"/>
             <input class="input-btn-style" type="submit" value="Create">

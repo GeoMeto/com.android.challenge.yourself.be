@@ -16,12 +16,9 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable()
                 //                .anyRequest().permitAll()
                 .authorizeRequests()
-                .mvcMatchers("/categories").hasRole(AdminRole)
-                .mvcMatchers("/create-category").hasRole(AdminRole)
-                .mvcMatchers("/challenges/**").hasRole(AdminRole)
-                .mvcMatchers("/users/**").hasRole(AdminRole)
+                .mvcMatchers("/admin/**").hasRole(AdminRole)
                 .and().formLogin().loginPage("/login")
-                .defaultSuccessUrl("/categories").failureUrl("/login?error=true").permitAll()
+                .defaultSuccessUrl("/admin/categories").failureUrl("/login?error=true").permitAll()
                 .and().logout().invalidateHttpSession(true).permitAll()
                 .and().httpBasic();
     }

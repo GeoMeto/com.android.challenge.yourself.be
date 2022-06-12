@@ -26,6 +26,10 @@ public class CategoriesService {
         return StreamSupport.stream(categoriesRepository.findAll().spliterator(), false).collect(Collectors.toList());
     }
 
+    public List<Category> getActiveCategories() {
+        return StreamSupport.stream(categoriesRepository.findByIsDeletedFalse().spliterator(), false).collect(Collectors.toList());
+    }
+
     public boolean saveCategory(Category category) {
         boolean isSaved = false;
         Category savedCategory = categoriesRepository.save(category);
@@ -41,6 +45,7 @@ public class CategoriesService {
         category.ifPresent(category1 -> {
             category1.setUpdatedAt(LocalDateTime.now());
             category1.setName(newCategory.getName());
+            category1.setDeleted(newCategory.isDeleted());
         });
         Category updatedCategory = categoriesRepository.save(category.get());
         if (null != updatedCategory && updatedCategory.getUpdatedAt() != null) {
@@ -51,5 +56,21 @@ public class CategoriesService {
 
     public Category getCategory(int id) {
         return categoriesRepository.findById(id).get();
+    }
+
+    public boolean deleteCategory(int id) {
+        boolean isDeleted = false;
+        Optional<Category> category = categoriesRepository.findById(id);
+        try {
+            categoriesRepository.delete(category.get());
+            isDeleted = true;
+        } catch (Exception e) {
+            log.error(e.toString());
+            category.get().setDeleted(true);
+            categoriesRepository.save(category.get());
+            isDeleted = true;
+        }
+
+        return isDeleted;
     }
 }
