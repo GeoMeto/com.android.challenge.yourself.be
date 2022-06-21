@@ -19,7 +19,7 @@ import java.util.List;
 @Component
 public class UsernamePwdAuthenticationProvider implements AuthenticationProvider {
     @Autowired
-    private UserRepository personRepository;
+    private UserRepository userRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -31,7 +31,7 @@ public class UsernamePwdAuthenticationProvider implements AuthenticationProvider
         if (email == "" || pwd == "") {
             throw new BadCredentialsException("Invalid credentials!");
         }
-        User user = personRepository.readByEmail(email);
+        User user = userRepository.readByEmail(email);
         if (null != user && user.getId() > 0 &&
                 passwordEncoder.matches(pwd, user.getPassword())) {
             return new UsernamePasswordAuthenticationToken(

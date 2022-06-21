@@ -43,4 +43,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private Set<UserComment> userComments;
+
+    @OneToMany(mappedBy = "user")
+    private Set<AuthToken> authTokens;
 }

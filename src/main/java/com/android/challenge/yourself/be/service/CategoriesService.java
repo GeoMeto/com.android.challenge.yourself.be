@@ -27,25 +27,25 @@ public class CategoriesService {
     }
 
     public List<Category> getActiveCategories() {
-        return StreamSupport.stream(categoriesRepository.findByIsDeletedFalse().spliterator(), false).collect(Collectors.toList());
+        return categoriesRepository.findByIsDeletedFalse();
     }
 
     public boolean saveCategory(Category category) {
         boolean isSaved = false;
         Category savedCategory = categoriesRepository.save(category);
-        if (savedCategory != null && savedCategory.getId() > 0) {
+        if (null != savedCategory && savedCategory.getId() > 0) {
             isSaved = true;
         }
         return isSaved;
     }
 
-    public boolean updateCategory(Category newCategory) {
+    public boolean updateCategory(Category categoryForUpdate) {
         boolean isUpdated = false;
-        Optional<Category> category = categoriesRepository.findById(newCategory.getId());
+        Optional<Category> category = categoriesRepository.findById(categoryForUpdate.getId());
         category.ifPresent(category1 -> {
             category1.setUpdatedAt(LocalDateTime.now());
-            category1.setName(newCategory.getName());
-            category1.setDeleted(newCategory.isDeleted());
+            category1.setName(categoryForUpdate.getName());
+            category1.setDeleted(categoryForUpdate.isDeleted());
         });
         Category updatedCategory = categoriesRepository.save(category.get());
         if (null != updatedCategory && updatedCategory.getUpdatedAt() != null) {
