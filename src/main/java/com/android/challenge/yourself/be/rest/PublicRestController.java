@@ -1,14 +1,13 @@
 package com.android.challenge.yourself.be.rest;
 
-import com.android.challenge.yourself.be.model.AuthToken;
+import com.android.challenge.yourself.be.model.core.AuthToken;
 import com.android.challenge.yourself.be.model.Login;
-import com.android.challenge.yourself.be.model.Response;
+import com.android.challenge.yourself.be.model.core.Response;
 import com.android.challenge.yourself.be.model.User;
 import com.android.challenge.yourself.be.repository.UserRepository;
 import com.android.challenge.yourself.be.service.AuthService;
 import com.android.challenge.yourself.be.service.UserService;
 import com.android.challenge.yourself.be.utils.EncryptionUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -19,7 +18,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Slf4j
 @RestController
 @RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
 @CrossOrigin(origins = "*")
@@ -68,20 +66,21 @@ public class PublicRestController {
     @PostMapping("/user")
     public ResponseEntity<AuthToken> createUser(@Valid @RequestBody User user) {
         User foundUser = userRepository.readByEmail(user.getEmail());
-        if (foundUser != null) {
+        if (foundUser != null && foundUser.getIsDeleted()) {
             user.setId(foundUser.getId());
         }
         boolean isSaved = userService.createUser(user);
         if (!isSaved) {
-            throw new RuntimeException("User was not created!");
+            return ResponseEntity
+                    .status(HttpStatus.NOT_ACCEPTABLE)
+                    .body(null);
         }
         AuthToken authToken = new AuthToken();
         authToken.setUser(user);
         authService.saveToken(authToken);
 
         return ResponseEntity
-                .status(HttpStatus.OK)
+                .status(HttpStatus.CREATED)
                 .body(authToken);
-
     }
 }

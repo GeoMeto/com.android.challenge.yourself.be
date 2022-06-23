@@ -1,4 +1,4 @@
-package com.android.challenge.yourself.be.model;
+package com.android.challenge.yourself.be.model.core;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

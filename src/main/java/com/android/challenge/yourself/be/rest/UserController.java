@@ -1,10 +1,11 @@
 package com.android.challenge.yourself.be.rest;
 
 import com.android.challenge.yourself.be.model.*;
+import com.android.challenge.yourself.be.model.core.AuthToken;
+import com.android.challenge.yourself.be.model.core.Response;
 import com.android.challenge.yourself.be.service.AuthService;
 import com.android.challenge.yourself.be.service.UserService;
 import com.android.challenge.yourself.be.utils.EncryptionUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
-@Slf4j
 @RestController
 @RequestMapping(path = "/api/secure", produces = {MediaType.APPLICATION_JSON_VALUE})
 @CrossOrigin(origins = "*")

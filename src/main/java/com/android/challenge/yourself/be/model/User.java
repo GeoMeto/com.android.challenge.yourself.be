@@ -1,5 +1,8 @@
 package com.android.challenge.yourself.be.model;
 
+import com.android.challenge.yourself.be.model.core.AuthToken;
+import com.android.challenge.yourself.be.model.core.BaseEntity;
+import com.android.challenge.yourself.be.model.like.UserSharingLike;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -57,4 +60,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private Set<AuthToken> authTokens;
+
+    @OneToMany(mappedBy = "user")
+    private Set<UserSharingLike> likedSharings;
 }

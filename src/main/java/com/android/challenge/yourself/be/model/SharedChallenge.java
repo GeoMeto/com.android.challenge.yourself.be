@@ -1,5 +1,7 @@
 package com.android.challenge.yourself.be.model;
 
+import com.android.challenge.yourself.be.model.core.BaseEntity;
+import com.android.challenge.yourself.be.model.like.UserSharingLike;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,11 +20,12 @@ public class SharedChallenge extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id")
-    private int id;
+    private Integer id;
+
+    @Column(columnDefinition = "TINYINT(1)")
+    private boolean isDeleted;
 
     private int likes;
-    private int dislikes;
-    private boolean isDeleted;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
@@ -34,4 +37,8 @@ public class SharedChallenge extends BaseEntity {
 
     @OneToMany(mappedBy = "sharedChallenge")
     private Set<UserComment> userComments;
+
+    @OneToMany(mappedBy = "sharedChallenge")
+    private Set<UserSharingLike> likedSharings;
+
 }

@@ -1,5 +1,6 @@
 package com.android.challenge.yourself.be.model;
 
+import com.android.challenge.yourself.be.model.core.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;

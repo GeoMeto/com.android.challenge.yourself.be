@@ -22,7 +22,6 @@ public class ChallengesController {
 
     @Autowired
     private ChallengesService challengesService;
-
     @Autowired
     private CategoriesService categoriesService;
 

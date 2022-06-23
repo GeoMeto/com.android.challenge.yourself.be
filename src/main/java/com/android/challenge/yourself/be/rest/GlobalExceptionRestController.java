@@ -1,7 +1,7 @@
 package com.android.challenge.yourself.be.rest;
 
 
-import com.android.challenge.yourself.be.model.Response;
+import com.android.challenge.yourself.be.model.core.Response;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpHeaders;

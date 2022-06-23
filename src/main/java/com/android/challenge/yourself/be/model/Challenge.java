@@ -1,5 +1,6 @@
 package com.android.challenge.yourself.be.model;
 
+import com.android.challenge.yourself.be.model.core.BaseEntity;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,6 +37,8 @@ public class Challenge extends BaseEntity {
     @Size(max = 100, message = "Description can be max 100 characters long")
     private String description;
 
+    @Column(columnDefinition = "TINYINT(1)")
+    private Boolean isPositive;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "category_id", referencedColumnName = "id", nullable = false)

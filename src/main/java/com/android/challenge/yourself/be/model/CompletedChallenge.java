@@ -1,5 +1,6 @@
 package com.android.challenge.yourself.be.model;
 
+import com.android.challenge.yourself.be.model.core.BaseEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,12 +15,16 @@ import javax.validation.constraints.Size;
 @NoArgsConstructor
 @Entity
 @Table(name = "completed_challenge")
+@NamedQueries({
+        @NamedQuery(name = "CompletedChallenge.softDeleteChallenge",
+                query = "UPDATE CompletedChallenge c SET c.isDeleted = '1' WHERE c.id = ?1")
+})
 public class CompletedChallenge extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @NotBlank(message = "Name must not be blank")
     @Size(min = 3, max = 45, message = "Name must be between 3 and 45 characters long")
@@ -35,8 +40,11 @@ public class CompletedChallenge extends BaseEntity {
 
     private int result;
     private int target;
+    @Column(columnDefinition = "TINYINT(1)")
     private boolean isShared;
+    @Column(columnDefinition = "TINYINT(1)")
     private boolean isCompleted;
+    @Column(columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
