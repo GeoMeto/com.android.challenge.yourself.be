@@ -1,26 +1,26 @@
 package com.android.challenge.yourself.be.service;
 
 import com.android.challenge.yourself.be.model.AuthToken;
+import com.android.challenge.yourself.be.model.User;
 import com.android.challenge.yourself.be.repository.AuthRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Service
 public class AuthService {
-
-    private final AuthRepository authRepository;
-
     @Autowired
-    public AuthService(AuthRepository authRepository) {
-        this.authRepository = authRepository;
-    }
+    private AuthRepository authRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public boolean saveToken(AuthToken authToken) {
         boolean isSaved = false;
+        authToken.setToken(passwordEncoder.encode(RandomStringUtils.randomAlphabetic(10)));
         AuthToken savedToken = authRepository.save(authToken);
         if (null != savedToken && savedToken.getId() > 0) {
             isSaved = true;
@@ -28,17 +28,23 @@ public class AuthService {
         return isSaved;
     }
 
+    @Transactional
     public boolean expireTokens(String token) {
         boolean areOldTokensDeleted = false;
-        List<AuthToken> currentTokens = authRepository.findAllByToken(token);
-        if (currentTokens.size() > 0) {
-            authRepository.deleteAll(currentTokens);
+        AuthToken currentToken = authRepository.findByToken(token);
+        if (null != currentToken) {
+            authRepository.deleteByUserId(currentToken.getUser().getId());
             areOldTokensDeleted = true;
         }
         return areOldTokensDeleted;
     }
 
     public boolean isTokenValid(String token) {
-        return !authRepository.findAllByToken(token).isEmpty();
+        return null != authRepository.findByToken(token);
+    }
+
+    public User getUser(String token) {
+        AuthToken currentToken = authRepository.findByToken(token);
+        return currentToken.getUser();
     }
 }
