@@ -2,6 +2,7 @@ package com.android.challenge.yourself.be.rest;
 
 import com.android.challenge.yourself.be.model.core.Response;
 import com.android.challenge.yourself.be.model.dto.ChallengeDTO;
+import com.android.challenge.yourself.be.model.dto.CompletedChallengeDTO;
 import com.android.challenge.yourself.be.model.entities.Challenge;
 import com.android.challenge.yourself.be.model.entities.CompletedChallenge;
 import com.android.challenge.yourself.be.model.entities.User;
@@ -31,14 +32,16 @@ public class ChallengesRestController {
 
     @GetMapping
     public ResponseEntity<List<ChallengeDTO>> getChallenges() {
-        List<ChallengeDTO> challenges = challengesService.getChallenges().stream().map(ChallengeDTO::new).collect(Collectors.toList());
+        List<ChallengeDTO> challenges = challengesService.getChallenges()
+                .stream().map(ChallengeDTO::new).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(challenges);
     }
 
     @PostMapping("/new")
-    public ResponseEntity<Response> createChallenge(@RequestHeader("Authorization") String token, @Valid @RequestBody CompletedChallenge challenge) {
+    public ResponseEntity<Response> createChallenge(@RequestHeader("Authorization") String token,
+                                                    @Valid @RequestBody CompletedChallenge challenge) {
         User user = authService.getUser(token);
         challenge.setUser(user);
         completedChallengesService.saveChallenge(challenge);
@@ -48,16 +51,18 @@ public class ChallengesRestController {
     }
 
     @GetMapping("/completed")
-    public ResponseEntity<List<CompletedChallenge>> getChallenges(@RequestHeader("Authorization") String token) {
+    public ResponseEntity<List<CompletedChallengeDTO>> getChallenges(@RequestHeader("Authorization") String token) {
         User user = authService.getUser(token);
-        List<CompletedChallenge> completedChallenges = completedChallengesService.getCompletedChallenges(user.getId());
+        List<CompletedChallengeDTO> completedChallenges = completedChallengesService.getCompletedChallenges(user.getId())
+                .stream().map(CompletedChallengeDTO::new).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(completedChallenges);
     }
 
     @PostMapping("/complete")
-    public ResponseEntity<Response> completeChallenge(@RequestHeader("Authorization") String token, @Valid @RequestBody CompletedChallenge challenge) {
+    public ResponseEntity<Response> completeChallenge(@RequestHeader("Authorization") String token,
+                                                      @Valid @RequestBody CompletedChallenge challenge) {
         User user = authService.getUser(token);
         challenge.setUser(user);
         if (challenge.getId() == null) {

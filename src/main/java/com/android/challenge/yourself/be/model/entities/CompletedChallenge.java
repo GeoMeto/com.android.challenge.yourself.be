@@ -34,18 +34,22 @@ public class CompletedChallenge extends BaseEntity {
     @Size(min = 3, max = 45, message = "Measurement must be between 3 and 45 characters long")
     private String measurement;
 
-    @NotBlank(message = "Name must not be blank")
-    @Size(max = 100, message = "Name must be between 3 and 45 characters long")
+    @Size(max = 100, message = "Description must be less than 100 characters long")
+    private String description;
+    @Size(max = 100, message = "Comment must be be less than 100 characters long")
     private String comment;
 
     private int result;
     private int target;
+    @Column(columnDefinition = "TINYINT(1)")
+    private boolean isPositive;
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isShared;
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isCompleted;
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
