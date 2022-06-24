@@ -1,6 +1,7 @@
 package com.android.challenge.yourself.be.rest;
 
 import com.android.challenge.yourself.be.model.core.Response;
+import com.android.challenge.yourself.be.model.dto.ChallengeDTO;
 import com.android.challenge.yourself.be.model.entities.Challenge;
 import com.android.challenge.yourself.be.model.entities.CompletedChallenge;
 import com.android.challenge.yourself.be.model.entities.User;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/secure/challenges", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -28,8 +30,8 @@ public class ChallengesRestController {
     private CompletedChallengesService completedChallengesService;
 
     @GetMapping
-    public ResponseEntity<List<Challenge>> getChallenges() {
-        List<Challenge> challenges = challengesService.getChallenges();
+    public ResponseEntity<List<ChallengeDTO>> getChallenges() {
+        List<ChallengeDTO> challenges = challengesService.getChallenges().stream().map(ChallengeDTO::new).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(challenges);
