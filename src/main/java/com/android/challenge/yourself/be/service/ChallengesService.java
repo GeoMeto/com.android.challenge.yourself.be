@@ -1,8 +1,7 @@
 package com.android.challenge.yourself.be.service;
 
-import com.android.challenge.yourself.be.model.Challenge;
+import com.android.challenge.yourself.be.model.entities.Challenge;
 import com.android.challenge.yourself.be.repository.ChallengeRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

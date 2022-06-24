@@ -1,8 +1,7 @@
 package com.android.challenge.yourself.be.repository;
 
-import com.android.challenge.yourself.be.model.CompletedChallenge;
+import com.android.challenge.yourself.be.model.entities.CompletedChallenge;
 import org.springframework.data.domain.Sort;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

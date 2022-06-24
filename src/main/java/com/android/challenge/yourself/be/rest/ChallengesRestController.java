@@ -1,7 +1,9 @@
 package com.android.challenge.yourself.be.rest;
 
-import com.android.challenge.yourself.be.model.*;
 import com.android.challenge.yourself.be.model.core.Response;
+import com.android.challenge.yourself.be.model.entities.Challenge;
+import com.android.challenge.yourself.be.model.entities.CompletedChallenge;
+import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.service.AuthService;
 import com.android.challenge.yourself.be.service.ChallengesService;
 import com.android.challenge.yourself.be.service.CompletedChallengesService;

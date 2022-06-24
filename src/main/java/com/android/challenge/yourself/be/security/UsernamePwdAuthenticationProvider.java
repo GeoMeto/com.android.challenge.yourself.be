@@ -1,6 +1,6 @@
 package com.android.challenge.yourself.be.security;
 
-import com.android.challenge.yourself.be.model.User;
+import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;

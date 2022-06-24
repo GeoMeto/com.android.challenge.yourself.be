@@ -1,6 +1,6 @@
 package com.android.challenge.yourself.be.service;
 
-import com.android.challenge.yourself.be.model.Category;
+import com.android.challenge.yourself.be.model.entities.Category;
 import com.android.challenge.yourself.be.repository.CategoriesRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

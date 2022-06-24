@@ -1,4 +1,4 @@
-package com.android.challenge.yourself.be.model;
+package com.android.challenge.yourself.be.model.entities;
 
 import com.android.challenge.yourself.be.model.core.BaseEntity;
 import lombok.Getter;

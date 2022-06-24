@@ -1,6 +1,6 @@
 package com.android.challenge.yourself.be.service;
 
-import com.android.challenge.yourself.be.model.CompletedChallenge;
+import com.android.challenge.yourself.be.model.entities.CompletedChallenge;
 import com.android.challenge.yourself.be.repository.CompletedChallengeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;

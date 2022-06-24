@@ -1,8 +1,8 @@
 package com.android.challenge.yourself.be.rest;
 
 import com.android.challenge.yourself.be.model.core.Response;
-import com.android.challenge.yourself.be.model.SharedChallenge;
-import com.android.challenge.yourself.be.model.User;
+import com.android.challenge.yourself.be.model.entities.SharedChallenge;
+import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.model.like.Like;
 import com.android.challenge.yourself.be.service.AuthService;
 import com.android.challenge.yourself.be.service.SharingService;

@@ -1,6 +1,6 @@
 package com.android.challenge.yourself.be.service;
 
-import com.android.challenge.yourself.be.model.SharedChallenge;
+import com.android.challenge.yourself.be.model.entities.SharedChallenge;
 import com.android.challenge.yourself.be.model.like.Like;
 import com.android.challenge.yourself.be.model.like.UserSharingLike;
 import com.android.challenge.yourself.be.model.like.UserSharingLikeId;
@@ -28,7 +28,7 @@ public class SharingService {
     }
 
     public List<SharedChallenge> getHotSharings() {
-        return sharedChallengeRepository.findByIsDeletedFalseAndBeforeCreatedAtDateOrderByLikesDesc(LocalDateTime.now().minusDays(3));
+        return sharedChallengeRepository.findByIsDeletedFalseAndCreatedAtBeforeOrderByLikesDesc(LocalDateTime.now().minusDays(3));
     }
 
     public boolean saveSharing(SharedChallenge sharedChallenge) {

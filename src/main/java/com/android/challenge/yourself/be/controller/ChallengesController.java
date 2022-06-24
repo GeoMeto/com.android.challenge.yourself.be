@@ -1,7 +1,7 @@
 package com.android.challenge.yourself.be.controller;
 
-import com.android.challenge.yourself.be.model.Category;
-import com.android.challenge.yourself.be.model.Challenge;
+import com.android.challenge.yourself.be.model.entities.Category;
+import com.android.challenge.yourself.be.model.entities.Challenge;
 import com.android.challenge.yourself.be.service.CategoriesService;
 import com.android.challenge.yourself.be.service.ChallengesService;
 import lombok.extern.slf4j.Slf4j;

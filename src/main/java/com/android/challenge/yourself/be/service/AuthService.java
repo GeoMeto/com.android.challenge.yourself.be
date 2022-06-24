@@ -1,7 +1,7 @@
 package com.android.challenge.yourself.be.service;
 
 import com.android.challenge.yourself.be.model.core.AuthToken;
-import com.android.challenge.yourself.be.model.User;
+import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.repository.AuthRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

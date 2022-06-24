@@ -1,9 +1,8 @@
 package com.android.challenge.yourself.be.service;
 
 
-import com.android.challenge.yourself.be.model.User;
+import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.repository.UserRepository;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
