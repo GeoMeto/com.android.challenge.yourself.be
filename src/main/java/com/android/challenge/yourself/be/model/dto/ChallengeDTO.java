@@ -14,6 +14,7 @@ import lombok.Setter;
 public class ChallengeDTO {
 
     private int id;
+    private int target;
     private String name;
     private String measurement;
     private String category;
@@ -22,6 +23,7 @@ public class ChallengeDTO {
 
     public ChallengeDTO(Challenge challenge) {
         this.setId(challenge.getId());
+        this.setTarget(challenge.getTarget());
         this.setName(challenge.getName());
         this.setMeasurement(challenge.getMeasurement());
         this.setCategory(challenge.getCategory().getName());

@@ -25,20 +25,16 @@ public class CompletedChallenge extends BaseEntity {
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id")
     private Integer id;
-
     @NotBlank(message = "Name must not be blank")
     @Size(min = 3, max = 45, message = "Name must be between 3 and 45 characters long")
     private String name;
-
     @NotBlank(message = "Measurement must not be blank")
     @Size(min = 3, max = 45, message = "Measurement must be between 3 and 45 characters long")
     private String measurement;
-
     @Size(max = 100, message = "Description must be less than 100 characters long")
     private String description;
     @Size(max = 100, message = "Comment must be be less than 100 characters long")
     private String comment;
-
     private int result;
     private int target;
     @Column(columnDefinition = "TINYINT(1)")
@@ -49,7 +45,6 @@ public class CompletedChallenge extends BaseEntity {
     private boolean isCompleted;
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
-
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)

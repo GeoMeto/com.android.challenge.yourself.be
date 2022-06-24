@@ -3,7 +3,6 @@ package com.android.challenge.yourself.be.rest;
 import com.android.challenge.yourself.be.model.core.Response;
 import com.android.challenge.yourself.be.model.dto.ChallengeDTO;
 import com.android.challenge.yourself.be.model.dto.CompletedChallengeDTO;
-import com.android.challenge.yourself.be.model.entities.Challenge;
 import com.android.challenge.yourself.be.model.entities.CompletedChallenge;
 import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.service.AuthService;
