@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -25,6 +27,8 @@ public class CompletedChallengeDTO {
     private Boolean isCompleted;
     private Boolean isDeleted;
     private int userId;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     public CompletedChallengeDTO(CompletedChallenge challenge) {
         this.setId(challenge.getId());
@@ -39,5 +43,7 @@ public class CompletedChallengeDTO {
         this.setIsCompleted(challenge.isCompleted());
         this.setIsDeleted(challenge.isDeleted());
         this.setUserId(challenge.getUser().getId());
+        this.setCreatedAt(challenge.getCreatedAt());
+        this.setUpdatedAt(challenge.getUpdatedAt());
     }
 }
