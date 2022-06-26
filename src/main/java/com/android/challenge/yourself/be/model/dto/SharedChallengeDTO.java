@@ -19,7 +19,8 @@ public class SharedChallengeDTO {
 
     private int id;
     private Boolean isDeleted;
-    private int userId;
+    private Boolean isLiked;
+    private int ownerId;
     private CompletedChallengeDTO completedChallengeDTO;
     private List<UserCommentDTO> userCommentDTO;
     private LocalDateTime createdAt;
@@ -27,10 +28,10 @@ public class SharedChallengeDTO {
     public SharedChallengeDTO(SharedChallenge challenge) {
         this.setId(challenge.getId());
         this.setIsDeleted(challenge.isDeleted());
-        this.setUserId(challenge.getUser().getId());
+        this.setOwnerId(challenge.getUser().getId());
         this.setCompletedChallengeDTO(new CompletedChallengeDTO(challenge.getCompletedChallenge()));
         this.setUserCommentDTO(
-                challenge.getUserComments().stream().map(UserCommentDTO::new).collect(Collectors.toList())
+                challenge.getUserComments().stream().map(x -> new UserCommentDTO(x, ownerId == challenge.getUser().getId())).collect(Collectors.toList())
         );
         this.setCreatedAt(challenge.getCreatedAt());
     }

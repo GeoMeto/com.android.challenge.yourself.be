@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(path = "/api/secure/share", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -29,24 +30,24 @@ public class SharingsRestController {
     private CompletedChallengesService completedChallengesService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<SharedChallenge>> getSharings() {
-        List<SharedChallenge> sharedChallenges = sharingService.getSharings();
+    public ResponseEntity<List<SharedChallengeDTO>> getSharings() {
+        List<SharedChallengeDTO> sharedChallenges = sharingService.getSharings().stream().map(SharedChallengeDTO::new).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(sharedChallenges);
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<SharedChallenge>> getUserSharings(@PathVariable int userId) {
-        List<SharedChallenge> sharedChallenges = sharingService.getSharings(userId);
+    public ResponseEntity<List<SharedChallengeDTO>> getUserSharings(@PathVariable int userId) {
+        List<SharedChallengeDTO> sharedChallenges = sharingService.getSharings(userId).stream().map(SharedChallengeDTO::new).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(sharedChallenges);
     }
 
     @GetMapping("/hot")
-    public ResponseEntity<List<SharedChallenge>> getHotSharings() {
-        List<SharedChallenge> sharedChallenges = sharingService.getHotSharings();
+    public ResponseEntity<List<SharedChallengeDTO>> getHotSharings() {
+        List<SharedChallengeDTO> sharedChallenges = sharingService.getHotSharings().stream().map(SharedChallengeDTO::new).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(sharedChallenges);
@@ -86,6 +87,6 @@ public class SharingsRestController {
         sharingService.deleteSharing(id);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new Response("200", "Sharing was deleted successfully"));
+                .body(new Response("200", "Sharing was softly deleted"));
     }
 }

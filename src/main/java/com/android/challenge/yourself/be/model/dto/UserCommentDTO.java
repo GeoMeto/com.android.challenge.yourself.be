@@ -13,11 +13,13 @@ import lombok.Setter;
 public class UserCommentDTO {
     private int id;
     private String content;
-    private int userId;
+    private boolean isOwner;
+    private String username;
 
-    public UserCommentDTO(UserComment userComment) {
+    public UserCommentDTO(UserComment userComment, boolean isOwner) {
         this.setId(userComment.getId());
         this.setContent(userComment.getContent());
-        this.setUserId(userComment.getUser().getId());
+        this.setOwner(isOwner);
+        this.setUsername(userComment.getUser().getUsername());
     }
 }

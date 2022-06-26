@@ -58,7 +58,7 @@ public class SharingService {
         return result;
     }
 
-    public void deleteSharing(int id) {
-        sharedChallengeRepository.deleteById(id);
+    public int deleteSharing(int id) {
+        return sharedChallengeRepository.softDeleteSharedChallenge(id);
     }
 }
