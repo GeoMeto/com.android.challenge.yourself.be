@@ -18,6 +18,10 @@ public class CompletedChallengesService {
         return completedChallengeRepository.findByUserIdAndIsDeletedFalse(userId, Sort.by("id").descending());
     }
 
+    public CompletedChallenge getCompletedChallenge(int id) {
+        return completedChallengeRepository.findById(id).get();
+    }
+
     public boolean saveChallenge(CompletedChallenge challenge) {
         boolean isSaved = false;
         CompletedChallenge savedChallenge = completedChallengeRepository.save(challenge);

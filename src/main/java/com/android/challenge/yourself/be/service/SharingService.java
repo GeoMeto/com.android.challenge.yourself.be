@@ -1,7 +1,7 @@
 package com.android.challenge.yourself.be.service;
 
 import com.android.challenge.yourself.be.model.entities.SharedChallenge;
-import com.android.challenge.yourself.be.model.like.Like;
+import com.android.challenge.yourself.be.model.like.LikesDTO;
 import com.android.challenge.yourself.be.model.like.UserSharingLike;
 import com.android.challenge.yourself.be.model.like.UserSharingLikeId;
 import com.android.challenge.yourself.be.repository.SharedChallengeRepository;
@@ -33,26 +33,32 @@ public class SharingService {
 
     public boolean saveSharing(SharedChallenge sharedChallenge) {
         boolean isSaved = false;
+        sharedChallenge.getCompletedChallenge().setShared(true);
         SharedChallenge savedSharing = sharedChallengeRepository.save(sharedChallenge);
         if (null != savedSharing && savedSharing.getId() > 0) {
             isSaved = true;
+
         }
         return isSaved;
     }
 
-    public Like likeSharing(int userId, int sharingId) {
-        Like result = new Like();
+    public LikesDTO likeSharing(int userId, int sharingId) {
+        LikesDTO result = new LikesDTO();
         UserSharingLikeId id = new UserSharingLikeId(userId, sharingId);
         if (userSharingLikeRepository.findByUserId(userId).isEmpty()) {
             UserSharingLike like = new UserSharingLike();
             like.setUserSharingLikeId(id);
             userSharingLikeRepository.save(like);
-            result.setSuccess(true);
+            result.setLiked(true);
         } else {
             userSharingLikeRepository.deleteById(id);
-            result.setSuccess(false);
+            result.setLiked(false);
         }
-        result.setCount(userSharingLikeRepository.findBySharingId(sharingId).size());
+        result.setLikesCount(userSharingLikeRepository.findBySharingId(sharingId).size());
         return result;
+    }
+
+    public void deleteSharing(int id) {
+        sharedChallengeRepository.deleteById(id);
     }
 }
