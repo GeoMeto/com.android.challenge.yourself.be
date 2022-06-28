@@ -15,7 +15,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Entity
 @Table(name = "shared_challenge")
-@NamedQuery(name = "SharedChallenge.softDeleteSharedChallenge", query = "UPDATE SharedChallenge s SET s.isDeleted = '1' WHERE u.id = ?1")
+@NamedQuery(name = "SharedChallenge.softDeleteSharedChallenge", query = "UPDATE SharedChallenge s SET s.isDeleted = '1' WHERE s.id = ?1")
 public class SharedChallenge extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
@@ -25,6 +25,8 @@ public class SharedChallenge extends BaseEntity {
 
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isDeleted;
+
+    private int likes;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
@@ -37,7 +39,7 @@ public class SharedChallenge extends BaseEntity {
     @OneToMany(mappedBy = "sharedChallenge")
     private Set<UserComment> userComments;
 
-    @OneToMany(mappedBy = "sharedChallenge")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sharedChallenge")
     private Set<UserSharingLike> likedSharings;
 
 }

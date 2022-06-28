@@ -23,7 +23,7 @@ public class Category extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     @Column(name = "id")
-    private int id;
+    private Integer id;
 
     @NotBlank(message = "Name must not be blank")
     @Size(min = 3, max = 45, message = "Name must be between 3 and 45 characters long")

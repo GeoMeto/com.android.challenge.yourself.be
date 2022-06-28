@@ -31,8 +31,7 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
 
         filter.setAuthenticationManager(new AuthenticationManager() {
             @Override
-            public Authentication authenticate(Authentication authentication)
-                    throws AuthenticationException {
+            public Authentication authenticate(Authentication authentication) throws AuthenticationException {
                 String principal = (String) authentication.getPrincipal();
 
                 if (!authService.isTokenValid(principal)) {

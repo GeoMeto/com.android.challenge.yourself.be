@@ -1,6 +1,10 @@
 package com.android.challenge.yourself.be.service;
 
+import com.android.challenge.yourself.be.model.dto.SharedChallengeDTO;
+import com.android.challenge.yourself.be.model.dto.UserCommentDTO;
 import com.android.challenge.yourself.be.model.entities.SharedChallenge;
+import com.android.challenge.yourself.be.model.entities.User;
+import com.android.challenge.yourself.be.model.entities.UserComment;
 import com.android.challenge.yourself.be.model.like.LikesDTO;
 import com.android.challenge.yourself.be.model.like.UserSharingLike;
 import com.android.challenge.yourself.be.model.like.UserSharingLikeId;
@@ -11,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class SharingService {
@@ -42,23 +47,38 @@ public class SharingService {
         return isSaved;
     }
 
-    public LikesDTO likeSharing(int userId, int sharingId) {
+    public LikesDTO likeSharing(User user, int sharingId) {
         LikesDTO result = new LikesDTO();
-        UserSharingLikeId id = new UserSharingLikeId(userId, sharingId);
-        if (userSharingLikeRepository.findByUserId(userId).isEmpty()) {
+        UserSharingLikeId id = new UserSharingLikeId(user.getId(), sharingId);
+        SharedChallenge sharedChallenge = sharedChallengeRepository.findById(sharingId).get();
+
+        if (null == userSharingLikeRepository.findByUserIdAndSharingId(user.getId(), sharingId)) {
             UserSharingLike like = new UserSharingLike();
             like.setUserSharingLikeId(id);
+            like.setUser(user);
+            like.setSharedChallenge(sharedChallenge);
             userSharingLikeRepository.save(like);
             result.setLiked(true);
         } else {
-            userSharingLikeRepository.deleteById(id);
+            userSharingLikeRepository.deleteById(id.getUserId(), id.getSharingId());
             result.setLiked(false);
         }
-        result.setLikesCount(userSharingLikeRepository.findBySharingId(sharingId).size());
+        int likesCount = userSharingLikeRepository.findBySharingId(sharingId).size();
+        sharedChallenge.setLikes(likesCount);
+        sharedChallengeRepository.save(sharedChallenge);
+        result.setLikesCount(likesCount);
         return result;
     }
 
     public int deleteSharing(int id) {
         return sharedChallengeRepository.softDeleteSharedChallenge(id);
+    }
+
+    public List<UserCommentDTO> getSharingComments(int sharingId, int ownerId) {
+        return sharedChallengeRepository.findById(sharingId).get().getUserComments().stream().map(x -> new UserCommentDTO(x, x.getUser().getId() == ownerId)).collect(Collectors.toList());
+    }
+
+    public SharedChallenge getSharing(int id) {
+        return sharedChallengeRepository.findById(id).get();
     }
 }

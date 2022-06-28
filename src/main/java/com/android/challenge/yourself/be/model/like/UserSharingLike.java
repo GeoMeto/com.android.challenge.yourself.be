@@ -16,12 +16,12 @@ public class UserSharingLike {
     @EmbeddedId
     private UserSharingLikeId userSharingLikeId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @MapsId("sharingId")
     @JoinColumn(name = "sharing_id")
     private SharedChallenge sharedChallenge;

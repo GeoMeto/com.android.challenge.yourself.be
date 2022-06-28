@@ -63,4 +63,7 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private Set<UserSharingLike> likedSharings;
+
+    @OneToMany(mappedBy = "user")
+    private Set<ReportedComment> reportedComments;
 }
