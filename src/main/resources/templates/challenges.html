@@ -20,6 +20,7 @@
             <th scope="col">Category</th>
             <th scope="col">Challenge name</th>
             <th scope="col">Measurement</th>
+            <th scope="col">Description</th>
             <th scope="col">Target</th>
             <th scope="col">Edit</th>
             <th scope="col">Delete</th>
@@ -30,6 +31,7 @@
             <td th:text="${challenge.category.name}"></td>
             <td th:text="${challenge.name}"></td>
             <td th:text="${challenge.measurement}"></td>
+            <td th:text="${challenge.description}"></td>
             <td th:text="${challenge.target}"></td>
             <td class="row-btn">
                 <form>

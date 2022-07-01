@@ -33,6 +33,8 @@
                         th:value="${measurement.displayValue}" th:text="${measurement.displayValue}"></option>
             </select>
         </div>
+        <label for="description">Description</label>
+        <input class="input-style" type="text" th:field="*{description}" placeholder="Description" id="description"/>
         <label for="target">Target</label>
         <input class="input-style" type="number" th:field="*{target}" placeholder="Target" id="target"/>
         <input class="input-btn-style" type="submit" value="Update">

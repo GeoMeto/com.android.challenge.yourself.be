@@ -17,7 +17,7 @@
     <h2>Create challenge</h2>
     <form action="/admin/challenges" method="post" class="form-style" th:object="${challenge}">
         <label for="name">Challenge name</label>
-        <input class="input-style" type="text" th:field="*{name}" placeholder="Category name" id="name"/>
+        <input class="input-style" type="text" th:field="*{name}" placeholder="Challenge name" id="name"/>
         <label for="categories">Category</label>
         <div class="box">
             <select id="categories" th:field="*{category.id}">
@@ -32,6 +32,8 @@
                         th:value="${measurement.displayValue}" th:text="${measurement.displayValue}"></option>
             </select>
         </div>
+        <label for="description">Description</label>
+        <input class="input-style" type="text" th:field="*{description}" placeholder="Description" id="description"/>
         <label for="target">Target</label>
         <input class="input-style" type="number" th:field="*{target}" placeholder="Target" id="target"/>
         <input class="input-btn-style" type="submit" value="Create">

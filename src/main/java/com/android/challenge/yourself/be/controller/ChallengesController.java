@@ -65,7 +65,7 @@ public class ChallengesController {
         }
 
         challengesService.saveChallenge(challenge);
-        modelAndView.setViewName("redirect:/admin/challenges.html");
+        modelAndView.setViewName("redirect:/admin/challenges");
         return modelAndView;
     }
 

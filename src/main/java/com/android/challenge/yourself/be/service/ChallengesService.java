@@ -41,6 +41,7 @@ public class ChallengesService {
             challenge1.setName(newChallenge.getName());
             challenge1.setCategory(newChallenge.getCategory());
             challenge1.setMeasurement(newChallenge.getMeasurement());
+            challenge1.setDescription(newChallenge.getDescription());
             challenge1.setTarget(newChallenge.getTarget());
         });
         Challenge updatedChallenge = challengeRepository.save(challenge.get());
