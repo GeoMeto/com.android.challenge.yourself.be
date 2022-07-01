@@ -32,7 +32,6 @@ public class User extends BaseEntity {
     @Column(name = "id")
     private Integer id;
 
-    @NotBlank(message = "Email must not be blank")
     @Email(message = "Please provide a valid email address")
     private String email;
 
@@ -67,4 +66,6 @@ public class User extends BaseEntity {
 
     @OneToMany(mappedBy = "user")
     private Set<ReportedSharing> reportedSharings;
+
+
 }

@@ -1,5 +1,6 @@
 package com.android.challenge.yourself.be.service;
 
+import com.android.challenge.yourself.be.model.dto.CategoryDTO;
 import com.android.challenge.yourself.be.model.entities.Category;
 import com.android.challenge.yourself.be.repository.CategoriesRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -39,15 +40,12 @@ public class CategoriesService {
         return isSaved;
     }
 
-    public boolean updateCategory(Category categoryForUpdate) {
+    public boolean updateCategory(CategoryDTO categoryForUpdate) {
         boolean isUpdated = false;
-        Optional<Category> category = categoriesRepository.findById(categoryForUpdate.getId());
-        category.ifPresent(category1 -> {
-            category1.setUpdatedAt(LocalDateTime.now());
-            category1.setName(categoryForUpdate.getName());
-            category1.setDeleted(categoryForUpdate.isDeleted());
-        });
-        Category updatedCategory = categoriesRepository.save(category.get());
+        Category category = categoriesRepository.findById(categoryForUpdate.getId()).get();
+        category.setName(categoryForUpdate.getName());
+        category.setDeleted(categoryForUpdate.getIsDeleted() != null);
+        Category updatedCategory = categoriesRepository.save(category);
         if (null != updatedCategory && updatedCategory.getUpdatedAt() != null) {
             isUpdated = true;
         }

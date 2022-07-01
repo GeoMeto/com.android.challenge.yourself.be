@@ -14,9 +14,11 @@
 <div th:replace="header :: header"></div>
 
 <div class="search-wrapper">
-    <form class="search-form-style" th:action="@{'/admin/users/page/1?email=' + ${email.email}}" th:object="${email}" method="get">
+    <form class="search-form-style" th:action="@{'/admin/users/page/1?email=' + ${email.email}}" th:object="${email}"
+          method="get">
         <label class="label-style-search" for="email">Email</label>
-        <input class="input-style-search" type="text" name="username" id="email" placeholder="Email" th:field="*{email}"/>
+        <input class="input-style-search" type="text" name="username" id="email" placeholder="Email"
+               th:field="*{email}"/>
         <button class="button">Search</button>
     </form>
 </div>
@@ -34,8 +36,8 @@
         </thead>
         <tbody>
         <tr th:each="user: ${users}">
-            <td th:text="${user.username}"></td>
             <td th:text="${user.email}"></td>
+            <td th:text="${user.username}"></td>
             <td th:text="${user.role}"></td>
             <td th:text="${user.isDeleted}"></td>
             <td class="row-btn">
@@ -44,8 +46,8 @@
                 </form>
             </td>
             <td class="row-btn">
-                <form>
-                    <button th:action="@{/admin/users/delete/(id=${user.id})}" method="post" class="button">DELETE
+                <form th:action="@{/admin/user/delete/{id}(id=${user.id})}" method="post">
+                    <button class="button">DELETE
                     </button>
                 </form>
             </td>

@@ -1,6 +1,8 @@
 package com.android.challenge.yourself.be.service;
 
 
+import com.android.challenge.yourself.be.constants.Role;
+import com.android.challenge.yourself.be.model.dto.UserDTO;
 import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +26,7 @@ public class UserService {
     public boolean createUser(User user) {
         boolean isUserCreated = false;
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole("Client");
+        user.setRole(Role.CLIENT.name());
         user.setIsDeleted(false);
         User createdUser = userRepository.save(user);
         if (createdUser != null && createdUser.getId() > 0) {
@@ -65,5 +67,25 @@ public class UserService {
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize, Sort.by("email"));
 
         return userRepository.findByEmailContaining(email,pageable);
+    }
+
+    public User getUser(int id) {
+        return userRepository.findById(id).get();
+    }
+
+    public boolean updateUser(UserDTO userDto) {
+        boolean isUserUpdated = false;
+
+        User foundUser = userRepository.findById(userDto.getId()).get();
+        foundUser.setIsDeleted(userDto.getIsDeleted() != null);
+        foundUser.setRole(userDto.getRole());
+        foundUser.setEmail(userDto.getEmail());
+        foundUser.setUsername(userDto.getUsername());
+
+        User result = userRepository.save(foundUser);
+        if (null != result) {
+            isUserUpdated = true;
+        }
+        return isUserUpdated;
     }
 }

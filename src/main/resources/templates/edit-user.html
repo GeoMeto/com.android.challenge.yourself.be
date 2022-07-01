@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Challenge Yourself Admin</title>
+    <!-- Google fonts -->
+    <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- Template CSS Style link -->
+    <link rel="stylesheet" href="/assets/css/style-starter.css">
+</head>
+
+<body>
+<div th:replace="header :: header"></div>
+<div class="input-wrapper">
+    <h2>
+    </h2>
+    <form th:action="@{/admin/user/{id}(id=${user.id})}" method="post" class="form-style" th:object="${user}">
+        <label for="email">Challenge name</label>
+        <input class="input-style" type="text" th:field="*{email}" placeholder="Email" id="email"/>
+        <label for="username">Challenge name</label>
+        <input class="input-style" type="text" th:field="*{username}" placeholder="Username" id="username"/>
+
+        <label for="roles">Roles</label>
+        <div class="box">
+            <select id="roles" th:field="*{role}">
+                <option th:each="role : ${T(com.android.challenge.yourself.be.constants.Role).values()}"
+                        th:value="${role.name}" th:text="${role.name}"></option>
+            </select>
+        </div>
+        <label for="isDeleted">Is deleted</label>
+        <input type="checkbox" id="isDeleted" value="isDeleted" name="isDeleted" th:checked="${user.isDeleted}">
+        </br>
+        <input class="input-btn-style" type="submit" value="Update">
+    </form>
+</div>
+</body>
+
+</html>

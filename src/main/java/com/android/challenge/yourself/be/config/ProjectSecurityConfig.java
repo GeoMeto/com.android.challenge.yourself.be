@@ -14,7 +14,6 @@ public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                //                .anyRequest().permitAll()
                 .authorizeRequests()
                 .mvcMatchers("/admin/**").hasRole(AdminRole)
                 .and().formLogin().loginPage("/login")

@@ -1,5 +1,6 @@
 package com.android.challenge.yourself.be.controller;
 
+import com.android.challenge.yourself.be.model.dto.CategoryDTO;
 import com.android.challenge.yourself.be.model.entities.Category;
 import com.android.challenge.yourself.be.service.CategoriesService;
 import lombok.extern.slf4j.Slf4j;
@@ -60,7 +61,7 @@ public class CategoriesController {
     }
 
     @PostMapping(value = {"/categories/{id}"})
-    public ModelAndView updateCategory(@PathVariable int id, @Valid @ModelAttribute("category") Category category, Errors errors) {
+    public ModelAndView updateCategory(@PathVariable int id, @Valid @ModelAttribute("category") CategoryDTO categoryDTO, Errors errors) {
         ModelAndView modelAndView = new ModelAndView();
         if (errors.hasErrors()) {
             log.error("Error when creating category: " + errors);
@@ -68,8 +69,8 @@ public class CategoriesController {
             modelAndView.addObject("errorMessage", "Name is mandatory!");
             return modelAndView;
         }
-        category.setId(id);
-        categoriesService.updateCategory(category);
+
+        categoriesService.updateCategory(categoryDTO);
         modelAndView.setViewName("redirect:/admin/categories");
         return modelAndView;
     }

@@ -54,4 +54,8 @@ public class ChallengesService {
     public Challenge getChallenge(int id) {
         return challengeRepository.findById(id).get();
     }
+
+    public void deleteChallenge(int id) {
+        challengeRepository.deleteById(id);
+    }
 }

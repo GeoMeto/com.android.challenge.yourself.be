@@ -4,8 +4,7 @@ import org.springframework.security.web.authentication.preauth.AbstractPreAuthen
 
 import javax.servlet.http.HttpServletRequest;
 
-public class PreAuthTokenHeaderFilter
-        extends AbstractPreAuthenticatedProcessingFilter {
+public class PreAuthTokenHeaderFilter extends AbstractPreAuthenticatedProcessingFilter {
 
     private String authHeaderName;
 

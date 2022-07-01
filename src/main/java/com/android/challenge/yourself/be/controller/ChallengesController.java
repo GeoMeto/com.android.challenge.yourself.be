@@ -85,4 +85,10 @@ public class ChallengesController {
         modelAndView.setViewName("redirect:/admin/challenges");
         return modelAndView;
     }
+
+    @PostMapping(value = {"/challenges/delete/{id}"})
+    public ModelAndView deleteChallenge(@PathVariable int id) {
+        challengesService.deleteChallenge(id);
+        return new ModelAndView("redirect:/admin/challenges");
+    }
 }
