@@ -16,7 +16,7 @@ public class UserSharingLike {
     @EmbeddedId
     private UserSharingLikeId userSharingLikeId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;

@@ -32,8 +32,9 @@ public class SharingsRestController {
     private CommentService commentService;
 
     @GetMapping("/all")
-    public ResponseEntity<List<SharedChallengeDTO>> getSharings() {
-        List<SharedChallengeDTO> sharedChallenges = sharingService.getSharings().stream().map(x -> new SharedChallengeDTO(x)).collect(Collectors.toList());
+    public ResponseEntity<List<SharedChallengeDTO>> getSharings(@RequestHeader("Authorization") String token) {
+        User user = authService.getUser(token);
+        List<SharedChallengeDTO> sharedChallenges = sharingService.getSharings().stream().map(x -> new SharedChallengeDTO(x, user.getId())).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(sharedChallenges);
@@ -43,15 +44,16 @@ public class SharingsRestController {
     public ResponseEntity<List<SharedChallengeDTO>> getUserSharings(@RequestHeader("Authorization") String token) {
         User user = authService.getUser(token);
 
-        List<SharedChallengeDTO> sharedChallenges = sharingService.getSharings(user.getId()).stream().map(x -> new SharedChallengeDTO(x)).collect(Collectors.toList());
+        List<SharedChallengeDTO> sharedChallenges = sharingService.getSharings(user.getId()).stream().map(x -> new SharedChallengeDTO(x, user.getId())).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(sharedChallenges);
     }
 
     @GetMapping("/hot")
-    public ResponseEntity<List<SharedChallengeDTO>> getHotSharings() {
-        List<SharedChallengeDTO> sharedChallenges = sharingService.getHotSharings().stream().map(x -> new SharedChallengeDTO(x)).collect(Collectors.toList());
+    public ResponseEntity<List<SharedChallengeDTO>> getHotSharings(@RequestHeader("Authorization") String token) {
+        User user = authService.getUser(token);
+        List<SharedChallengeDTO> sharedChallenges = sharingService.getHotSharings().stream().map(x -> new SharedChallengeDTO(x, user.getId())).collect(Collectors.toList());
         return ResponseEntity
                 .status(HttpStatus.OK)
                 .body(sharedChallenges);
@@ -72,7 +74,7 @@ public class SharingsRestController {
         sharingService.saveSharing(sharedChallenge);
         return ResponseEntity
                 .status(HttpStatus.CREATED)
-                .body(new Response("200", "Challenge was shared"));
+                .body(new Response("201", "Challenge was shared"));
     }
 
     @PostMapping("/like/{id}")
@@ -130,7 +132,7 @@ public class SharingsRestController {
                 .body(new Response("200", "Comment was deleted"));
     }
 
-    @PostMapping("comment/report/{id}")
+    @PostMapping("/comment/report/{id}")
     public ResponseEntity<Response> reportComment(@RequestHeader("Authorization") String token, @PathVariable int id) {
         User user = authService.getUser(token);
         UserComment userComment = commentService.getComment(id);
@@ -146,5 +148,23 @@ public class SharingsRestController {
         return ResponseEntity
                 .status(HttpStatus.CREATED)
                 .body(new Response("201", "Comment report was saved."));
+    }
+
+    @PostMapping("/report/{id}")
+    public ResponseEntity<Response> reportSharing(@RequestHeader("Authorization") String token, @PathVariable int id) {
+        User user = authService.getUser(token);
+        SharedChallenge sharedChallenge = sharingService.getSharing(id);
+        ReportedSharing reportedSharing = new ReportedSharing();
+        reportedSharing.setUser(user);
+        reportedSharing.setSharedChallenge(sharedChallenge);
+        if (sharingService.saveReportedSharing(reportedSharing)) {
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body(new Response("409", "Challenge was already reported!"));
+        }
+
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body(new Response("201", "Challenge report was saved."));
     }
 }

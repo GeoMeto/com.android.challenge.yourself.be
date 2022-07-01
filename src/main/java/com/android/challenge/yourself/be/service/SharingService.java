@@ -1,13 +1,11 @@
 package com.android.challenge.yourself.be.service;
 
-import com.android.challenge.yourself.be.model.dto.SharedChallengeDTO;
 import com.android.challenge.yourself.be.model.dto.UserCommentDTO;
-import com.android.challenge.yourself.be.model.entities.SharedChallenge;
-import com.android.challenge.yourself.be.model.entities.User;
-import com.android.challenge.yourself.be.model.entities.UserComment;
+import com.android.challenge.yourself.be.model.entities.*;
 import com.android.challenge.yourself.be.model.like.LikesDTO;
 import com.android.challenge.yourself.be.model.like.UserSharingLike;
 import com.android.challenge.yourself.be.model.like.UserSharingLikeId;
+import com.android.challenge.yourself.be.repository.ReportedSharingRepository;
 import com.android.challenge.yourself.be.repository.SharedChallengeRepository;
 import com.android.challenge.yourself.be.repository.UserSharingLikeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +21,8 @@ public class SharingService {
     private SharedChallengeRepository sharedChallengeRepository;
     @Autowired
     private UserSharingLikeRepository userSharingLikeRepository;
+    @Autowired
+    private ReportedSharingRepository reportedSharingRepository;
 
     public List<SharedChallenge> getSharings() {
         return sharedChallengeRepository.findByIsDeletedFalseOrderByIdDesc();
@@ -33,7 +33,7 @@ public class SharingService {
     }
 
     public List<SharedChallenge> getHotSharings() {
-        return sharedChallengeRepository.findByIsDeletedFalseAndCreatedAtBeforeOrderByLikesDesc(LocalDateTime.now().minusDays(3));
+        return sharedChallengeRepository.findByIsDeletedFalseAndCreatedAtAfterOrderByLikesDesc(LocalDateTime.now().minusDays(3));
     }
 
     public boolean saveSharing(SharedChallenge sharedChallenge) {
@@ -80,5 +80,15 @@ public class SharingService {
 
     public SharedChallenge getSharing(int id) {
         return sharedChallengeRepository.findById(id).get();
+    }
+
+    public boolean saveReportedSharing(ReportedSharing reportedSharing) {
+        boolean isSaved = false;
+        ReportedSharing foundComment = reportedSharingRepository.findByUserIdAndSharedChallengeId(reportedSharing.getUser().getId(), reportedSharing.getSharedChallenge().getId());
+        if (null == foundComment) {
+            reportedSharingRepository.save(reportedSharing);
+            isSaved = true;
+        }
+        return isSaved;
     }
 }

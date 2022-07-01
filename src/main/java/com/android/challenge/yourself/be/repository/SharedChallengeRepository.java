@@ -14,7 +14,7 @@ public interface SharedChallengeRepository extends PagingAndSortingRepository<Sh
 
     List<SharedChallenge> findByIsDeletedFalseOrderByIdDesc();
     List<SharedChallenge> findByUserIdAndIsDeletedFalseOrderByIdDesc(int usedId);
-    List<SharedChallenge> findByIsDeletedFalseAndCreatedAtBeforeOrderByLikesDesc(LocalDateTime date);
+    List<SharedChallenge> findByIsDeletedFalseAndCreatedAtAfterOrderByLikesDesc(LocalDateTime date);
     @Transactional
     @Modifying
     int softDeleteSharedChallenge(int id);

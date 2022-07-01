@@ -28,6 +28,5 @@ public class ChallengeDTO {
         this.setMeasurement(challenge.getMeasurement());
         this.setCategory(challenge.getCategory().getName());
         this.setDescription(challenge.getDescription());
-        this.setIsPositive(challenge.getIsPositive());
     }
 }

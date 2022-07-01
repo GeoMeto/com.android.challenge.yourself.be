@@ -41,6 +41,21 @@ public class SharedChallengeDTO {
 
         Set<UserSharingLike> likedSharings = challenge.getLikedSharings();
         this.setLikeCount(likedSharings.size());
-        this.setIsLiked(likedSharings.stream().anyMatch(x -> x.getUser().getId().equals(challenge.getUser().getId())));
+        this.setIsLiked(false);
+    }
+
+    public SharedChallengeDTO(SharedChallenge challenge, int userId) {
+        this.setId(challenge.getId());
+        this.setIsDeleted(challenge.isDeleted());
+        this.setOwnerId(challenge.getUser().getId());
+        this.setCompletedChallengeDTO(new CompletedChallengeDTO(challenge.getCompletedChallenge()));
+        this.setUserCommentDTO(
+                challenge.getUserComments().stream().map(x -> new UserCommentDTO(x, ownerId == challenge.getUser().getId())).collect(Collectors.toList())
+        );
+        this.setCreatedAt(challenge.getCreatedAt());
+
+        Set<UserSharingLike> likedSharings = challenge.getLikedSharings();
+        this.setLikeCount(likedSharings.size());
+        this.setIsLiked(likedSharings.stream().anyMatch(x -> x.getUser().getId().equals(userId)));
     }
 }
