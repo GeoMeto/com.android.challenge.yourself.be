@@ -7,12 +7,62 @@
     <title>Challenge Yourself Admin</title>
     <!-- Google fonts -->
     <link href="//fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <!-- Template CSS Style link -->
     <link rel="stylesheet" href="/assets/css/style-starter.css">
 </head>
 
 <body>
 <div th:replace="header :: header"></div>
+
+<div class="search-wrapper">
+    <form class="search-form-style" th:action="@{'/admin/users/page/1?email=' + ${email.email}}" th:object="${email}" method="get">
+        <label class="label-style-search" for="email">Email</label>
+        <input class="input-style-search" type="text" name="username" id="email" placeholder="Email" th:field="*{email}"/>
+        <button class="button">Search</button>
+    </form>
+</div>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th scope="col">Email</th>
+            <th scope="col">Username</th>
+            <th scope="col">Role</th>
+            <th scope="col">Is deleted</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user: ${users}">
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.email}"></td>
+            <td th:text="${user.role}"></td>
+            <td th:text="${user.isDeleted}"></td>
+            <td class="row-btn">
+                <form>
+                    <a th:href="@{/admin/users/edit/{id}(id=${user.id})}" class="button">EDIT</a>
+                </form>
+            </td>
+            <td class="row-btn">
+                <form>
+                    <button th:action="@{/admin/users/delete/(id=${user.id})}" method="post" class="button">DELETE
+                    </button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="pagination-style">
+        <ul>
+        <span th:each="i: ${#numbers.sequence(1, totalPages)}">
+            <li>
+                <a th:if="${currentPage != i}" th:href="@{'/admin/users/page/' + ${i} + '?email=' + ${email.email}}">[[${i}]]</a>
+                <a class="currentPage" th:unless="${currentPage != i}">[[${i}]]</a>
+            </li>
+        </span>
+        </ul>
+    </div>
+</div>
 
 </body>
 

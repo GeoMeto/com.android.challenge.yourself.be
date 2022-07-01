@@ -45,8 +45,6 @@ public class User extends BaseEntity {
     private String role;
 
     @Column(columnDefinition = "TINYINT(1)")
-    private Boolean isActive;
-    @Column(columnDefinition = "TINYINT(1)")
     private Boolean isDeleted;
 
     @OneToMany(mappedBy = "user")

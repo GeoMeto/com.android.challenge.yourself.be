@@ -4,8 +4,14 @@ package com.android.challenge.yourself.be.service;
 import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class UserService {
@@ -20,7 +26,6 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setRole("Client");
         user.setIsDeleted(false);
-        user.setIsActive(true);
         User createdUser = userRepository.save(user);
         if (createdUser != null && createdUser.getId() > 0) {
             isUserCreated = true;
@@ -53,5 +58,12 @@ public class UserService {
             isUserUpdated = true;
         }
         return isUserUpdated;
+    }
+
+    public Page<User> getUsersByEmailSorted(int pageNum, String email) {
+        int pageSize = 2;
+        Pageable pageable = PageRequest.of(pageNum - 1, pageSize, Sort.by("email"));
+
+        return userRepository.findByEmailContaining(email,pageable);
     }
 }
