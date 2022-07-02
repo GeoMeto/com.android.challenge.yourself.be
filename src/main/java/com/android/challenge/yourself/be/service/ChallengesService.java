@@ -5,7 +5,6 @@ import com.android.challenge.yourself.be.repository.ChallengeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -37,7 +36,6 @@ public class ChallengesService {
         boolean isUpdated = false;
         Optional<Challenge> challenge = challengeRepository.findById(newChallenge.getId());
         challenge.ifPresent(challenge1 -> {
-            challenge1.setUpdatedAt(LocalDateTime.now());
             challenge1.setName(newChallenge.getName());
             challenge1.setCategory(newChallenge.getCategory());
             challenge1.setMeasurement(newChallenge.getMeasurement());

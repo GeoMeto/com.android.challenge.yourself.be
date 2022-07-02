@@ -1,18 +1,12 @@
 package com.android.challenge.yourself.be.model.dto;
 
-import com.android.challenge.yourself.be.model.core.AuthToken;
 import com.android.challenge.yourself.be.model.core.BaseEntity;
-import com.android.challenge.yourself.be.model.entities.*;
-import com.android.challenge.yourself.be.model.like.UserSharingLike;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Set;
 
 @Getter
 @Setter

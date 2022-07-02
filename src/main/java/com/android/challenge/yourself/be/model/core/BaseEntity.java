@@ -10,7 +10,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -20,10 +20,10 @@ public class BaseEntity {
     @JsonIgnore
     @CreatedDate
     @Column(updatable = false)
-    private LocalDateTime createdAt;
+    private LocalDate createdAt;
 
     @JsonIgnore
     @LastModifiedDate
     @Column(insertable = false)
-    private LocalDateTime updatedAt;
+    private LocalDate updatedAt;
 }

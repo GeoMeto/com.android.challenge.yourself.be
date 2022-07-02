@@ -16,5 +16,6 @@ public class LoggerAspect {
     @AfterThrowing(value = "execution(* com.android.challenge.yourself.be..*.*(..))", throwing = "ex")
     public void logException(JoinPoint joinPoint, Exception ex) {
         log.error(joinPoint.getSignature() + " An exception happened due to : " + ex.getMessage());
+        ex.printStackTrace();
     }
 }

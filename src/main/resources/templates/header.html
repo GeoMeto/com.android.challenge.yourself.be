@@ -11,24 +11,22 @@
     <nav class="navigation" sec:authorize="hasRole('ROLE_ADMIN')">
         <ul>
             <li class="nav-item">
-                <a th:classappend="${#httpServletRequest.getRequestURI() == '/categories' ? 'active':''}"
-                   th:href="@{/admin/categories}" class="nav-link" aria-current="page">Categories</a>
+                <a th:href="@{/admin/categories}" class="nav-link" aria-current="page">Categories</a>
             </li>
             <li class="nav-item">
-                <a th:classappend="${#httpServletRequest.getRequestURI() == '/challenges' ? 'active':''}"
-                   th:href="@{/admin/challenges}" class="nav-link">Challenges</a>
+                <a th:href="@{/admin/challenges}" class="nav-link">Challenges</a>
             </li>
             <li class="nav-item">
-                <a th:classappend="${#httpServletRequest.getRequestURI() == '/sharings' ? 'active':''}"
-                   th:href="@{/admin/sharings}" class="nav-link">Posts</a>
+                <a th:href="@{'/admin/posts/page/1?date='}" class="nav-link">Posts</a>
             </li>
             <li class="nav-item">
-                <a th:classappend="${#httpServletRequest.getRequestURI() == '/users' ? 'active':''}"
-                   th:href="@{/admin/users/page/1?email=}" class="nav-link">Users</a>
+                <a th:href="@{'/admin/comments/page/1?date='}" class="nav-link">Comments</a>
+            </li>
+            <li class="nav-item">
+                <a th:href="@{/admin/users/page/1?email=}" class="nav-link">Users</a>
             </li>
             <li class="nav-item logout">
-                <a  th:classappend="${#httpServletRequest.getRequestURI() == '/logout' ? 'active':''}"
-                    th:href="@{/logout}" class="nav-link">Logout</a>
+                <a th:href="@{/logout}" class="nav-link">Logout</a>
             </li>
         </ul>
     </nav>

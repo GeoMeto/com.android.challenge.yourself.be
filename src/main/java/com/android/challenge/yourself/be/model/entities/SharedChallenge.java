@@ -27,6 +27,7 @@ public class SharedChallenge extends BaseEntity {
     private boolean isDeleted;
 
     private int likes;
+    private int reports;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable = false)
@@ -42,4 +43,6 @@ public class SharedChallenge extends BaseEntity {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "sharedChallenge")
     private Set<UserSharingLike> likedSharings;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "sharedChallenge")
+    private Set<ReportedSharing> reportedSharings;
 }

@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -27,8 +27,8 @@ public class CompletedChallengeDTO {
     private Boolean isCompleted;
     private Boolean isDeleted;
     private int userId;
-    private LocalDateTime createdAt;
-    private LocalDateTime updatedAt;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
 
     public CompletedChallengeDTO(CompletedChallenge challenge) {
         this.setId(challenge.getId());

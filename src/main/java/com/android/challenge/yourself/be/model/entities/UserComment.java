@@ -24,6 +24,8 @@ public class UserComment extends BaseEntity {
     @Size(max = 100, message = "Comment must be max 100 characters long")
     private String content;
 
+    private int reports;
+
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "sh_ch_id", referencedColumnName = "id", nullable = false)
     private SharedChallenge sharedChallenge;
