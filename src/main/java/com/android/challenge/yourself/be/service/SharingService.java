@@ -1,12 +1,8 @@
 package com.android.challenge.yourself.be.service;
 
-import com.android.challenge.yourself.be.model.dto.UserCommentDTO;
-import com.android.challenge.yourself.be.model.entities.ReportedSharing;
-import com.android.challenge.yourself.be.model.entities.SharedChallenge;
-import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.model.dto.LikesDTO;
-import com.android.challenge.yourself.be.model.entities.UserSharingLike;
-import com.android.challenge.yourself.be.model.entities.UserSharingLikeId;
+import com.android.challenge.yourself.be.model.dto.UserCommentDTO;
+import com.android.challenge.yourself.be.model.entities.*;
 import com.android.challenge.yourself.be.repository.ReportedSharingRepository;
 import com.android.challenge.yourself.be.repository.SharedChallengeRepository;
 import com.android.challenge.yourself.be.repository.UserSharingLikeRepository;

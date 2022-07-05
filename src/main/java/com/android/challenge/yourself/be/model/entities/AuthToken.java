@@ -1,6 +1,5 @@
 package com.android.challenge.yourself.be.model.entities;
 
-import com.android.challenge.yourself.be.model.entities.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

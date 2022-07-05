@@ -1,9 +1,6 @@
 package com.android.challenge.yourself.be.controller;
 
-import com.android.challenge.yourself.be.model.dto.SharedChallengeMVC;
 import com.android.challenge.yourself.be.model.dto.UserCommentMVC;
-import com.android.challenge.yourself.be.model.entities.ReportedComment;
-import com.android.challenge.yourself.be.model.entities.SharedChallenge;
 import com.android.challenge.yourself.be.model.entities.UserComment;
 import com.android.challenge.yourself.be.service.CommentService;
 import lombok.extern.slf4j.Slf4j;

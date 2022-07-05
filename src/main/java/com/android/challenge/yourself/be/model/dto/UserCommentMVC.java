@@ -1,8 +1,6 @@
 package com.android.challenge.yourself.be.model.dto;
 
 
-import com.android.challenge.yourself.be.model.entities.ReportedComment;
-import com.android.challenge.yourself.be.model.entities.SharedChallenge;
 import com.android.challenge.yourself.be.model.entities.UserComment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

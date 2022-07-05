@@ -1,6 +1,5 @@
 package com.android.challenge.yourself.be.repository;
 
-import com.android.challenge.yourself.be.model.entities.ReportedComment;
 import com.android.challenge.yourself.be.model.entities.UserComment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

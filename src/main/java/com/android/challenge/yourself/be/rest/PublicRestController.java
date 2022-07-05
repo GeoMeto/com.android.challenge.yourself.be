@@ -1,8 +1,8 @@
 package com.android.challenge.yourself.be.rest;
 
-import com.android.challenge.yourself.be.model.entities.AuthToken;
 import com.android.challenge.yourself.be.model.core.Response;
 import com.android.challenge.yourself.be.model.dto.Login;
+import com.android.challenge.yourself.be.model.entities.AuthToken;
 import com.android.challenge.yourself.be.model.entities.User;
 import com.android.challenge.yourself.be.repository.UserRepository;
 import com.android.challenge.yourself.be.service.AuthService;
