@@ -4,7 +4,7 @@ import com.android.challenge.yourself.be.model.core.Response;
 import com.android.challenge.yourself.be.model.dto.SharedChallengeDTO;
 import com.android.challenge.yourself.be.model.dto.UserCommentDTO;
 import com.android.challenge.yourself.be.model.entities.*;
-import com.android.challenge.yourself.be.model.like.LikesDTO;
+import com.android.challenge.yourself.be.model.dto.LikesDTO;
 import com.android.challenge.yourself.be.service.AuthService;
 import com.android.challenge.yourself.be.service.CommentService;
 import com.android.challenge.yourself.be.service.CompletedChallengesService;

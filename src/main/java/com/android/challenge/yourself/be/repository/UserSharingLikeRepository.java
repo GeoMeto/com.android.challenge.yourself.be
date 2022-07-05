@@ -1,7 +1,7 @@
 package com.android.challenge.yourself.be.repository;
 
-import com.android.challenge.yourself.be.model.like.UserSharingLike;
-import com.android.challenge.yourself.be.model.like.UserSharingLikeId;
+import com.android.challenge.yourself.be.model.entities.UserSharingLike;
+import com.android.challenge.yourself.be.model.entities.UserSharingLikeId;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

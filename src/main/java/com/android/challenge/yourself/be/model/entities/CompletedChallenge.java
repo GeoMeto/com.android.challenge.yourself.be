@@ -38,8 +38,6 @@ public class CompletedChallenge extends BaseEntity {
     private int result;
     private int target;
     @Column(columnDefinition = "TINYINT(1)")
-    private boolean isPositive;
-    @Column(columnDefinition = "TINYINT(1)")
     private boolean isShared;
     @Column(columnDefinition = "TINYINT(1)")
     private boolean isCompleted;

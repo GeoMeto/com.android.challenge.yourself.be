@@ -1,4 +1,4 @@
-package com.android.challenge.yourself.be.model.core;
+package com.android.challenge.yourself.be.model.entities;
 
 import com.android.challenge.yourself.be.model.entities.User;
 import lombok.AllArgsConstructor;

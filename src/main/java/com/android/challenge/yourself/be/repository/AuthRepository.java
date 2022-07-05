@@ -1,6 +1,6 @@
 package com.android.challenge.yourself.be.repository;
 
-import com.android.challenge.yourself.be.model.core.AuthToken;
+import com.android.challenge.yourself.be.model.entities.AuthToken;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AuthRepository extends JpaRepository<AuthToken, Integer> {

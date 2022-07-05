@@ -1,4 +1,4 @@
-package com.android.challenge.yourself.be.model.like;
+package com.android.challenge.yourself.be.model.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

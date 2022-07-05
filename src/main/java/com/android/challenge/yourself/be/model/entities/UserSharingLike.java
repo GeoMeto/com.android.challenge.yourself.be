@@ -1,7 +1,5 @@
-package com.android.challenge.yourself.be.model.like;
+package com.android.challenge.yourself.be.model.entities;
 
-import com.android.challenge.yourself.be.model.entities.SharedChallenge;
-import com.android.challenge.yourself.be.model.entities.User;
 import lombok.Getter;
 import lombok.Setter;
 

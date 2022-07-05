@@ -20,7 +20,6 @@ public class CompletedChallengeDTO {
     private String measurement;
     private String comment;
     private String description;
-    private Boolean isPositive;
     private int result;
     private int target;
     private Boolean isShared;
@@ -36,7 +35,6 @@ public class CompletedChallengeDTO {
         this.setMeasurement(challenge.getMeasurement());
         this.setComment(challenge.getComment());
         this.setDescription(challenge.getDescription());
-        this.setIsPositive(challenge.isPositive());
         this.setResult(challenge.getResult());
         this.setTarget(challenge.getTarget());
         this.setIsShared(challenge.isShared());

@@ -2,14 +2,12 @@ package com.android.challenge.yourself.be.model.dto;
 
 
 import com.android.challenge.yourself.be.model.entities.SharedChallenge;
-import com.android.challenge.yourself.be.model.like.UserSharingLike;
+import com.android.challenge.yourself.be.model.entities.UserSharingLike;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
