@@ -1,11 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
-
-<head>
-
-</head>
-
 <body>
 <header id="site-header" class="fixed-top">
     <nav class="navigation" sec:authorize="hasRole('ROLE_ADMIN')">
@@ -34,5 +29,5 @@
         th:text="${errorMessage}" />
 </header>
 </body>
-
 </html>
+

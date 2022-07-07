@@ -1,5 +1,6 @@
 package com.android.challenge.yourself.be.config;
 
+import com.android.challenge.yourself.be.constants.Role;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -9,13 +10,12 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 public class ProjectSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final String AdminRole = "ADMIN";
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable()
                 .authorizeRequests()
-                .mvcMatchers("/admin/**").hasRole(AdminRole)
+                .mvcMatchers("/admin/**").hasRole(Role.ADMIN.name())
                 .and().formLogin().loginPage("/login")
                 .defaultSuccessUrl("/admin/categories").failureUrl("/login?error=true").permitAll()
                 .and().logout().invalidateHttpSession(true).permitAll()

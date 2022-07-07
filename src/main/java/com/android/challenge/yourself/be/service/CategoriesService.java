@@ -15,6 +15,7 @@ import java.util.stream.StreamSupport;
 @Slf4j
 @Service
 public class CategoriesService {
+
     private final CategoriesRepository categoriesRepository;
 
     @Autowired

@@ -17,9 +17,9 @@
     <h2>
     </h2>
     <form th:action="@{/admin/user/{id}(id=${user.id})}" method="post" class="form-style" th:object="${user}">
-        <label for="email">Challenge name</label>
+        <label for="email">Email</label>
         <input class="input-style" type="text" th:field="*{email}" placeholder="Email" id="email"/>
-        <label for="username">Challenge name</label>
+        <label for="username">Username</label>
         <input class="input-style" type="text" th:field="*{username}" placeholder="Username" id="username"/>
 
         <label for="roles">Roles</label>

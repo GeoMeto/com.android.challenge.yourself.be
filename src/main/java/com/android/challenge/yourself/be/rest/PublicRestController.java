@@ -36,7 +36,9 @@ public class PublicRestController {
     @PostMapping("/login")
     public ResponseEntity<AuthToken> login(@Valid @RequestBody Login login) {
         User user = userRepository.readByEmail(login.getEmail());
-        if (null != user && user.getId() > 0 && passwordEncoder.matches(encryptionUtils.decrypt(login.getPass()), user.getPassword())) {
+        if (null != user && user.getId() > 0 && passwordEncoder.matches(
+                encryptionUtils.decrypt(login.getPass()),
+                user.getPassword())) {
             if (user.getIsDeleted()) {
                 return ResponseEntity
                         .status(HttpStatus.LOCKED)

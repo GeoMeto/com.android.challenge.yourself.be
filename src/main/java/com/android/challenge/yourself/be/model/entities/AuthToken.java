@@ -23,7 +23,6 @@ public class AuthToken {
     @Column(name = "id")
     private int id;
 
-    @NotBlank(message = "Token can not be blank")
     @Size(min = 10, max = 255, message = "Token not in valid range")
     private String token;
 

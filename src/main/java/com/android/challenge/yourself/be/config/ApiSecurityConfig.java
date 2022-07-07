@@ -21,19 +21,17 @@ import static com.android.challenge.yourself.be.constants.Constants.AUTH;
 @EnableWebSecurity
 @Order(1)
 public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
-    private String authHeaderName = AUTH;
     @Autowired
     private AuthService authService;
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
-        PreAuthTokenHeaderFilter filter = new PreAuthTokenHeaderFilter(authHeaderName);
+        PreAuthTokenHeaderFilter filter = new PreAuthTokenHeaderFilter(AUTH);
 
         filter.setAuthenticationManager(new AuthenticationManager() {
             @Override
             public Authentication authenticate(Authentication authentication) throws AuthenticationException {
                 String principal = (String) authentication.getPrincipal();
-
                 if (!authService.isTokenValid(principal)) {
                     throw new BadCredentialsException("The API key was not found.");
                 }
@@ -43,18 +41,14 @@ public class ApiSecurityConfig extends WebSecurityConfigurerAdapter {
         });
 
         httpSecurity.antMatcher("/api/secure/**")
-                .csrf()
-                .disable()
+                .csrf().disable()
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
-                .addFilter(filter)
+                .and().addFilter(filter)
                 .addFilterBefore(new ExceptionTranslationFilter(
                                 new Http403ForbiddenEntryPoint()),
                         filter.getClass()
                 )
-                .authorizeRequests()
-                .anyRequest()
-                .authenticated();
+                .authorizeRequests().anyRequest().authenticated();
     }
 }

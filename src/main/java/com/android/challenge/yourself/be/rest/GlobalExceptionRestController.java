@@ -20,7 +20,8 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 public class GlobalExceptionRestController extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+                                                          HttpHeaders headers, HttpStatus status, WebRequest request) {
         log.error(ex.toString());
         Response response = new Response(status.toString(),
                 ex.getBindingResult().toString());
