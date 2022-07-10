@@ -25,7 +25,7 @@ public class SharingService {
     @Autowired
     private ReportedSharingRepository reportedSharingRepository;
 
-    private final static int pageSize = 5;
+    private final static int pageSize = 20;
 
     public List<SharedChallenge> getSharings() {
         return sharedChallengeRepository.findByIsDeletedFalseOrderByIdDesc();

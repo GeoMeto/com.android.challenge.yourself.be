@@ -56,7 +56,7 @@
         <ul>
         <span th:each="i: ${#numbers.sequence(1, totalPages)}">
             <li>
-                <a th:if="${currentPage != i}" th:href="@{'/admin/posts/page/' + ${i} + '?date=' + ${date?.date}}">[[${i}]]</a>
+                <a th:if="${currentPage != i}" th:href="@{'/admin/posts/page/' + ${i} + '?date='}">[[${i}]]</a>
                 <a class="currentPage" th:unless="${currentPage != i}">[[${i}]]</a>
             </li>
         </span>

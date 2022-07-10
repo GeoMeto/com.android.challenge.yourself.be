@@ -13,5 +13,4 @@ import java.util.List;
 public interface UserCommentRepository extends JpaRepository<UserComment, Integer> {
     List<UserComment> findByCreatedAtOrderByReportsDesc(LocalDate date);
     Page<UserComment> findByOrderByReportsDescCreatedAtDesc(Pageable pageable);
-
 }

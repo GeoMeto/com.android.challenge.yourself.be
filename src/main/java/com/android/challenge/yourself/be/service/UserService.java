@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
+    private final int pageSize = 20;
 
     @Autowired
     private UserRepository userRepository;
@@ -61,7 +62,6 @@ public class UserService {
     }
 
     public Page<User> getUsersByEmailSorted(int pageNum, String email) {
-        int pageSize = 2;
         Pageable pageable = PageRequest.of(pageNum - 1, pageSize, Sort.by("email"));
 
         return userRepository.findByEmailContaining(email,pageable);

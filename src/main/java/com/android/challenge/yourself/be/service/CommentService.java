@@ -19,7 +19,7 @@ public class CommentService {
     private UserCommentRepository commentRepository;
     @Autowired
     private ReportedCommentRepository reportedCommentRepository;
-    private final static int pageSize = 5;
+    private final static int pageSize = 20;
 
     public UserComment saveComment(UserComment userComment) {
         return commentRepository.save(userComment);
